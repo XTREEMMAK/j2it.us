@@ -1,6 +1,5 @@
-# sv
-
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+# J2IT - Website
+This is the official website of J2it.us
 
 ## Creating a project
 
