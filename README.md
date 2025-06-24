@@ -1,5 +1,5 @@
 # J2IT - Website
-This is the official website of J2it.us
+This is the official website for J2it.us.
 
 ## Creating a project
 
