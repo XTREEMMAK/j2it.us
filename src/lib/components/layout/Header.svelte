@@ -1,4 +1,6 @@
 <script>
+  import { PUBLIC_CDN_URL } from '$env/static/public';
+
   import { onMount } from 'svelte';
   import { fly } from 'svelte/transition';
 
@@ -12,7 +14,7 @@
 {#if mounted}
   <header class="flex flex-col md:flex-row items-center gap-6 max-w-5xl w-full mb-10">
   <img
-    src="/images/Jamaal_Photo.webp"
+    src="{PUBLIC_CDN_URL}/images/Jamaal_Photo.webp"
     alt="Jamaal Ephriam"
     class="w-44 h-60 object-cover rounded-xl shadow-md"
     in:fly={{ y: 40, duration: 1500 }}

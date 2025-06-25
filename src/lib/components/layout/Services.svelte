@@ -1,9 +1,12 @@
 <script>
+  import { PUBLIC_CDN_URL } from '$env/static/public';
+
   import { onMount } from 'svelte';
   import { fly, fade } from 'svelte/transition';
   
   let active = null;
   let mounted = false;
+  let pub_path = PUBLIC_CDN_URL
 
     onMount(() => {
         mounted = true;
@@ -12,25 +15,25 @@
   const services = [
   {
     title: 'Managed IT Support',
-    image: '/images/677870180.webp',
+    image: pub_path+'/images/677870180.webp',
     description: 'Comprehensive IT support tailored to your business — from resolving daily issues to proactive system maintenance that keeps everything running smoothly.',
     color: 'bg-blue-50'
   },
   {
     title: 'Remote Monitoring & Patching',
-    image: '/images/888337820.webp',
+    image: pub_path+'/images/888337820.webp',
     description: '24/7 monitoring and automatic patch management to secure your systems and minimize downtime — before problems turn into headaches.',
     color: 'bg-green-50'
   },
   {
     title: 'Data Backup Solutions',
-    image: '/images/76521625.webp',
+    image: pub_path+'/images/76521625.webp',
     description: 'Automated, secure backups — both local and cloud-based — so your critical data is safe, recoverable, and always within reach.',
     color: 'bg-yellow-50'
   },
   {
     title: 'Network Setup & Troubleshooting',
-    image: '/images/954827414.webp',
+    image: pub_path+'/images/954827414.webp',
     description: 'Design and support for reliable wired and wireless networks, with fast troubleshooting to keep your team connected and productive.',
     color: 'bg-purple-50'
   },
