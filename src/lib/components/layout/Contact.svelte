@@ -18,7 +18,7 @@
     <iframe
       id="j2it-contact"
       src="https://forms.j2it.us/forms/j2it-contact"
-      style="border: none; width: 100%; min-height: 500px;"
+      style="border: none; width: 100%; min-height: 480px;"
       title="Contact form for J²it"
     ></iframe>
     <script

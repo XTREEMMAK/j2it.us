@@ -37,7 +37,7 @@
   <!-- Open Graph -->
   <meta property="og:title" content="J²it: IT and Web Solutions" />
   <meta property="og:description" content="Reliable IT support and web solutions for small business by Jamaal Ephriam." />
-  <meta property="og:image" content="{PUBLIC_CDN_URL}/images/j2it_promo.webp" />
+  <meta property="og:image" content="{PUBLIC_CDN_URL}/images/Jamaal_Photo.webp" />
   <meta property="og:url" content="https://www.j2it.us" />
   <meta property="og:type" content="website" />
 
@@ -45,7 +45,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="J²it: IT and Web Solutions" />
   <meta name="twitter:description" content="Reliable IT support and tech consulting for small business by Jamaal Ephriam." />
-  <meta name="twitter:image" content="{PUBLIC_CDN_URL}/images/j2it_promo.webp" />
+  <meta name="twitter:image" content="{PUBLIC_CDN_URL}/images/Jamaal_Photo.webp" />
 
   <!-- Structured Data (optional placeholder) -->
   <script type="application/ld+json">

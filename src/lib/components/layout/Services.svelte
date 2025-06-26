@@ -16,19 +16,19 @@
   {
     title: 'Managed IT Support',
     image: pub_path+'/images/677870180.webp',
-    description: 'Comprehensive IT support tailored to your business — from resolving daily issues to proactive system maintenance that keeps everything running smoothly.',
+    description: 'Reliable IT support customized to fit the needs of your business. From helping with everyday tech problems to maintaining systems behind the scenes, I focus on keeping your operations running smoothly and securely.',
     color: 'bg-blue-50'
   },
   {
     title: 'Remote Monitoring & Patching',
     image: pub_path+'/images/888337820.webp',
-    description: '24/7 monitoring and automatic patch management to secure your systems and minimize downtime — before problems turn into headaches.',
+    description: 'Proactive system monitoring and automated patch management to secure your systems and minimize downtime before problems turn into headaches.',
     color: 'bg-green-50'
   },
   {
     title: 'Data Backup Solutions',
     image: pub_path+'/images/76521625.webp',
-    description: 'Automated, secure backups — both local and cloud-based — so your critical data is safe, recoverable, and always within reach.',
+    description: 'Automated, secure backups both local and cloud-based so your critical data is safe, recoverable, and always within reach.',
     color: 'bg-yellow-50'
   },
   {
@@ -44,9 +44,9 @@
   //   color: 'bg-red-50'
   // },
   {
-    title: 'Small Business Tech Consulting',
+    title: 'Small Business Tech & Digital Consulting',
     image: '/images/330388413.webp',
-    description: 'Get expert, practical advice on IT strategy, growth planning, and tool selection — with solutions that match your size and goals.',
+    description: 'Get expert, practical advice on IT strategy, growth planning, and tool selection with solutions that match your size and goals. <br><br>I also do Custom-built PCs and servers, website setup and hosting, and more! Just ask.',
     color: 'bg-pink-50'
   }
 ];
@@ -88,7 +88,7 @@
               class="w-full sm:w-40 h-auto rounded-lg shadow-md"
               in:fly={{ y: 20, duration: 300 }}
             />
-            <p class="text-sm text-gray-700">{service.description}</p>
+            <p class="text-m text-gray-700">{@html service.description}</p>
           </div>
         </div>
       {/if}
