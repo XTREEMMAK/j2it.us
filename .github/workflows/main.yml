@@ -84,8 +84,14 @@ jobs:
           sed -i 's|{{CARD_JAMAAL_COUNTRY}}|USA|g' .env
           sed -i 's|{{CARD_JAMAAL_IMAGE}}|Jamaal_Photo.webp|g' .env
 
-          # Deploy to server
-          scp .env ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/.env
+          # Validate that all placeholders were replaced
+          if grep -q '{{' .env; then
+            echo "Error: Unreplaced placeholders found in .env file:"
+            grep '{{' .env
+            exit 1
+          fi
+
+          echo "✅ Environment file created successfully"
 
       - name: Build project
         run: npm run build
@@ -101,6 +107,11 @@ jobs:
       - name: Upload build and dependencies
         run: |
           ls -la build/
+          # First, backup and remove old .env file on server to ensure clean deployment
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "cd ${{ secrets.SERVER_DIRECTORY }} && [ -f .env ] && cp .env .env.backup || true"
+          # Upload the new .env file
+          scp .env ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/.env
+          # Upload build and dependencies
           scp -r build ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/
           scp package.json package-lock.json ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/
 
