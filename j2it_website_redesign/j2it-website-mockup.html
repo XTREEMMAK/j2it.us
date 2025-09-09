@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J2 IT Solutions - Affordable IT Support for Small Businesses</title>
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0f0f1a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background: rgba(15, 15, 26, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4dd3ff 0%, #4dd36f 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4dd3ff;
+        }
+
+        .sign-up-btn {
+            background: linear-gradient(135deg, #4dd36f 0%, #3fb55f 100%);
+            padding: 10px 24px;
+            border-radius: 25px;
+            color: white !important;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sign-up-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #4dd36f 0%, #3fb55f 100%);
+            border-radius: 25px;
+            filter: blur(20px);
+            opacity: 0.5;
+            z-index: -1;
+            transition: opacity 0.3s;
+        }
+
+        .sign-up-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .sign-up-btn:hover::before {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 140px 60px 100px;
+            position: relative;
+            background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(77, 211, 111, 0.3) 0%, transparent 50%);
+            filter: blur(100px);
+            opacity: 0.5;
+            animation: float-glow 8s ease-in-out infinite;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(77, 211, 255, 0.3) 0%, transparent 50%);
+            filter: blur(100px);
+            opacity: 0.5;
+            animation: float-glow-reverse 10s ease-in-out infinite;
+        }
+
+        @keyframes float-glow {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        @keyframes float-glow-reverse {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, 30px) scale(1.1); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, white 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 36px;
+        }
+
+        /* Profile Introduction Section */
+        .intro-section {
+            padding: 80px 60px;
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(77, 211, 255, 0.1) 0%, rgba(77, 211, 111, 0.1) 50%, transparent 70%);
+            filter: blur(100px);
+            opacity: 0.6;
+        }
+
+        .intro-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4dd36f 0%, #3fb55f 100%);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.3s;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, #4dd36f 0%, #3fb55f 100%);
+            border-radius: 30px;
+            filter: blur(25px);
+            opacity: 0.6;
+            z-index: -1;
+            transition: opacity 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Profile Card */
+        .profile-card {
+            position: relative;
+            width: 320px;
+            height: 320px;
+        }
+
+        .profile-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(from 180deg at 50% 50%, 
+                #4dd3ff 0deg, 
+                #4dd36f 90deg, 
+                #ff4d8f 180deg, 
+                #4dd3ff 270deg, 
+                #4dd3ff 360deg);
+            padding: 3px;
+            animation: rotate 10s linear infinite;
+        }
+
+        .profile-ring::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: conic-gradient(from 180deg at 50% 50%, 
+                #4dd3ff 0deg, 
+                #4dd36f 90deg, 
+                #ff4d8f 180deg, 
+                #4dd3ff 270deg, 
+                #4dd3ff 360deg);
+            border-radius: 50%;
+            filter: blur(30px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-inner {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            background: #1a1a2e;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+            border: 3px solid rgba(77, 211, 111, 0.3);
+        }
+
+        .profile-text {
+            text-align: left;
+            flex: 1;
+        }
+
+        .profile-text h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #4dd3ff 0%, #4dd36f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-text h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .profile-text p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        /* What You Get Section */
+        .features-section {
+            padding: 100px 60px;
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-left {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-icon {
+            color: #4dd36f;
+            font-size: 20px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+        }
+
+        .features-right {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            height: fit-content;
+        }
+
+        .feature-card {
+            border-radius: 20px;
+            position: relative;
+            transition: transform 0.3s;
+            overflow: visible;
+            isolation: isolate;
+            z-index: 1;
+        }
+
+        .feature-card-inner {
+            background-color: #0b090a;
+            padding: 30px 20px;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-card-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+        }
+
+        /* Animated gradient border */
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 20px;
+            padding: 4px;
+            background: linear-gradient(45deg, #4dd3ff, #4dd36f, #ff4d8f, #ffbb33, #4dd3ff);
+            background-size: 300% 300%;
+            animation: gradient-rotate 4s ease infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: 0;
+            filter: brightness(120%);
+        }
+
+        @keyframes gradient-rotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Individual color variations */
+        .feature-card:nth-child(1)::after {
+            background: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #4dd3ff 100%);
+            background-size: 300% 300%;
+        }
+
+        .feature-card:nth-child(2)::after {
+            background: linear-gradient(43deg, #4dd36f 0%, #3fb55f 46%, #6fd38f 100%);
+            background-size: 300% 300%;
+        }
+
+        .feature-card:nth-child(3)::after {
+            background: linear-gradient(43deg, #ff4d8f 0%, #C850C0 46%, #FFCC70 100%);
+            background-size: 300% 300%;
+        }
+
+        /* Always visible glow effect behind the card */
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            z-index: -1;
+            filter: blur(25px);
+            opacity: 0.8;
+        }
+
+        .feature-card:nth-child(1)::before {
+            background: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #4dd3ff 100%);
+        }
+
+        .feature-card:nth-child(2)::before {
+            background: linear-gradient(43deg, #4dd36f 0%, #3fb55f 46%, #6fd38f 100%);
+        }
+
+        .feature-card:nth-child(3)::before {
+            background: linear-gradient(43deg, #ff4d8f 0%, #C850C0 46%, #FFCC70 100%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .feature-card:hover::after {
+            animation-duration: 2s;
+            filter: brightness(140%);
+        }
+
+        .feature-card-inner {
+            background-color: #0b090a;
+            padding: 30px 20px;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-card-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+        }
+
+        .feature-card-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .feature-card h4 {
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .feature-card p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Pricing Card with Animated Gradient Border */
+        .pricing-card {
+            grid-column: span 3;
+            border-radius: 20px;
+            position: relative;
+            overflow: visible;
+            isolation: isolate;
+            z-index: 1;
+        }
+
+        .pricing-card-inner {
+            background-color: #0b090a;
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pricing-card-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+        }
+
+        /* Animated gradient border for pricing */
+        .pricing-card::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 20px;
+            padding: 4px;
+            background: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            background-size: 300% 300%;
+            animation: gradient-rotate 3s ease infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: 0;
+            filter: brightness(120%);
+        }
+
+        /* Always visible strong glow effect for pricing */
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110%;
+            height: 110%;
+            background: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            filter: blur(30px);
+            opacity: 0.7;
+            z-index: -1;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { 
+                opacity: 0.6; 
+                transform: translate(-50%, -50%) scale(1); 
+            }
+            50% { 
+                opacity: 0.9; 
+                transform: translate(-50%, -50%) scale(1.05); 
+            }
+        }
+
+        .pricing-card:hover::after {
+            animation-duration: 1.5s;
+            filter: brightness(140%);
+        }
+
+        .pricing-card-inner {
+            background-color: #0b090a;
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pricing-card-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+        }
+
+        .pricing-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .pricing-card .price {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .pricing-card .price-detail {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+        }
+
+        .pricing-card .price-alt {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .pricing-card .disclaimer {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card a {
+            color: #4dd3ff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .pricing-card a:hover {
+            color: #4dd36f;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 60px;
+            background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
+        }
+
+        .how-it-works-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cta-section {
+            margin-bottom: 60px;
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .process-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .process-card {
+            border-radius: 20px;
+            position: relative;
+            transition: transform 0.3s;
+            overflow: visible;
+            isolation: isolate;
+            z-index: 1;
+        }
+
+        .process-card-inner {
+            background-color: #0b090a;
+            padding: 40px 30px;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .process-card-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+        }
+
+        /* Animated gradient borders for process cards */
+        .process-card::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 20px;
+            padding: 4px;
+            background: linear-gradient(45deg, #4dd36f, #4dd3ff, #ff4d8f, #4dd36f);
+            background-size: 300% 300%;
+            animation: gradient-rotate 4s ease infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: 0;
+        }
+
+        .process-card:nth-child(1)::after {
+            animation-delay: 0s;
+        }
+
+        .process-card:nth-child(2)::after {
+            animation-delay: 1.3s;
+        }
+
+        .process-card:nth-child(3)::after {
+            animation-delay: 2.6s;
+        }
+
+        /* Glow effects for process cards */
+        .process-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            height: 150%;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+
+        .process-card:nth-child(1)::before {
+            background: radial-gradient(circle, rgba(77, 211, 111, 0.3) 0%, transparent 70%);
+            filter: blur(40px);
+        }
+
+        .process-card:nth-child(2)::before {
+            background: radial-gradient(circle, rgba(77, 211, 255, 0.3) 0%, transparent 70%);
+            filter: blur(40px);
+        }
+
+        .process-card:nth-child(3)::before {
+            background: radial-gradient(circle, rgba(255, 77, 143, 0.3) 0%, transparent 70%);
+            filter: blur(40px);
+        }
+
+        .process-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .process-card:hover::before {
+            opacity: 1;
+        }
+
+        .process-card:hover::after {
+            animation-duration: 2s;
+        }
+
+        .process-card-inner {
+            background-color: #0b090a;
+            padding: 40px 30px;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .process-card-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+        }
+
+        .process-number {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4dd3ff 0%, #4dd36f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .process-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .process-description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .hero-section {
+                padding: 100px 20px 60px;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .intro-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-text {
+                text-align: center;
+            }
+
+            .profile-card {
+                margin: 0 auto;
+            }
+
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-right {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card {
+                grid-column: span 1;
+            }
+
+            .process-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">
+            <div class="logo-circle">J2</div>
+            <span class="company-name">J2 IT Solutions</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#services">Services</a>
+            <a href="#health-check">Free IT Health Check</a>
+            <a href="#contact">Contact</a>
+            <a href="#" class="sign-up-btn">Sign Lormils</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Affordable IT Support for Small Businesses — Simple, Worry-Free</h1>
+                <p>For just $400/month, I'll keep your computers secure, backed up, and running — so you can focus on running your business, not fighting with tech.</p>
+                <div class="hero-buttons">
+                    <a href="#health-check" class="btn-primary">Get Your Free IT Health Check</a>
+                    <a href="#contact" class="btn-secondary">Schedule a Free 20-Min Call</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Introduction Section -->
+    <section class="intro-section">
+        <div class="intro-content">
+            <div class="profile-card">
+                <div class="profile-ring"></div>
+                <div class="profile-inner">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%234dd36f'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='80' font-family='Arial'%3EJ%3C/text%3E%3C/svg%3E" alt="Jamaal" class="profile-image">
+                </div>
+            </div>
+            <div class="profile-text">
+                <h2>Meet Your IT Partner</h2>
+                <h3>Hi, I'm Jamaal.</h3>
+                <p>I provide affordable IT support for small businesses that don't have a full-time IT person. For a flat monthly fee, I keep your computers secure, patched, and backed up.</p>
+                <p>No confusing tech jargon, no surprise bills — just reliable IT support that lets you focus on what you do best: running your business.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You Get Section -->
+    <section class="features-section" id="services">
+        <div class="features-grid">
+            <div class="features-left">
+                <h2 class="section-title">What You Get</h2>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span class="feature-text">Small offices, retail shops, or professional services with 3-10 computers</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span class="feature-text">Businesses without a dedicated IT person on staff</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span class="feature-text">Companies tired of emergency IT bills and unpredictable costs</span>
+                </div>
+            </div>
+            <div class="features-right">
+                <div class="feature-card">
+                    <div class="feature-card-inner">
+                        <div class="feature-card-content">
+                            <div class="feature-card-icon">
+                                <span class="iconify" data-icon="material-symbols:security" data-width="40" data-height="40"></span>
+                            </div>
+                            <h4>Security<br>Protection</h4>
+                            <p>Remote monitoring</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-inner">
+                        <div class="feature-card-content">
+                            <div class="feature-card-icon">
+                                <span class="iconify" data-icon="material-symbols-light:backup-outline-rounded" data-width="40" data-height="40"></span>
+                            </div>
+                            <h4>Backup<br>Monitoring</h4>
+                            <p>Software updates</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-inner">
+                        <div class="feature-card-content">
+                            <div class="feature-card-icon">
+                                <span class="iconify" data-icon="fluent-mdl2:post-update" data-width="40" data-height="40"></span>
+                            </div>
+                            <h4>Software<br>Updates</h4>
+                            <p>Monthly reports</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-card-inner">
+                        <div class="pricing-card-content">
+                            <h3>Flat Rate:</h3>
+                            <div class="price">$400/month</div>
+                            <div class="price-detail">for up to 4 computers</div>
+                            <div class="price-alt">Or: $100 per computer/month</div>
+                            <div class="price-alt">No hidden fees</div>
+                            <div class="disclaimer">Get enterprise-level IT support without the enterprise price tag.<br>Simple, transparent pricing that fits your budget.</div>
+                            <a href="#contact">Schedule your free consultation →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="how-it-works-content">
+            <div class="section-title">How This Works</div>
+            
+            <div class="cta-section">
+                <h2>Stop Fighting with<br>Technology</h2>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-primary">Or schedule a quick call</a>
+                    <a href="#" class="btn-secondary">Schis sdil a cuira call</a>
+                </div>
+            </div>
+
+            <div class="process-cards">
+                <div class="process-card">
+                    <div class="process-card-inner">
+                        <div class="process-card-content">
+                            <div class="process-number">1</div>
+                            <div class="process-title">Free Assessment</div>
+                            <div class="process-description">I'll check your current setup and identify risks</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="process-card">
+                    <div class="process-card-inner">
+                        <div class="process-card-content">
+                            <div class="process-number">2</div>
+                            <div class="process-title">Simple Setup</div>
+                            <div class="process-description">Quick installation of monitoring tools</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="process-card">
+                    <div class="process-card-inner">
+                        <div class="process-card-content">
+                            <div class="process-number">3</div>
+                            <div class="process-title">Ongoing Peace of Mind</div>
+                            <div class="process-description">Flat monthly rate, reliable support</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sparkle decoration removed -->
+</body>
+</html>
