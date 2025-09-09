@@ -8,26 +8,31 @@
 	import MyFooter from '$lib/components/layout/Footer.svelte';
 	import TawkMessenger from 'tawk-messenger-svelte';
 	import { PUBLIC_TAWK_PROPERTY_ID, PUBLIC_TAWK_WIDGET_ID } from '$env/static/public';
+	import { throttle } from '$lib/utils/throttle.js';
+	import { createLocalBusinessSchema } from '$lib/utils/structuredData.js';
 
 	let mouseX = 0;
 	let mouseY = 0;
 	let cursorX = 0;
 	let cursorY = 0;
 	let showTawk = false;
+	let animationId = null;
 
 	onMount(() => {
 		// Check if mobile and hide Tawk on mobile
 		showTawk = window.innerWidth > 768;
-		const handleMouseMove = (e) => {
+
+		// Throttled mouse move handler - only update every 16ms (60fps max)
+		const handleMouseMove = throttle((e) => {
 			mouseX = e.clientX;
 			mouseY = e.clientY;
-		};
+		}, 16);
 
 		const animateCursor = () => {
 			const speed = 0.15;
 			cursorX += (mouseX - cursorX) * speed;
 			cursorY += (mouseY - cursorY) * speed;
-			requestAnimationFrame(animateCursor);
+			animationId = requestAnimationFrame(animateCursor);
 		};
 
 		document.addEventListener('mousemove', handleMouseMove);
@@ -35,6 +40,7 @@
 
 		return () => {
 			document.removeEventListener('mousemove', handleMouseMove);
+			if (animationId) cancelAnimationFrame(animationId);
 		};
 	});
 
@@ -50,21 +56,8 @@
 		});
 	});
 
-	const structuredData = {
-		'@context': 'https://schema.org',
-		'@type': 'LocalBusiness',
-		name: 'J²IT: IT and Web Solutions',
-		url: 'https://www.j2it.us',
-		image: `${PUBLIC_CDN_URL}/logo_plus_sub.webp`,
-		address: {
-			'@type': 'PostalAddress',
-			streetAddress: '3620 W Hillsboro Blvd',
-			addressLocality: 'Coconut Creek',
-			addressRegion: 'FL',
-			postalCode: '33073',
-			addressCountry: 'US'
-		}
-	};
+	// Generate structured data from environment variables
+	const structuredData = createLocalBusinessSchema();
 </script>
 
 <svelte:head>
@@ -101,6 +94,9 @@
 		content="Reliable IT support and tech consulting for small business by Jamaal Ephriam."
 	/>
 	<meta name="twitter:image" content="{PUBLIC_CDN_URL}/images/Jamaal_Photo.webp" />
+
+	<!-- Canonical URL -->
+	<link rel="canonical" href="https://www.j2it.us" />
 
 	<!-- Structured Data -->
 	{@html `<script type="application/ld+json">${JSON.stringify(structuredData)}</script>`}

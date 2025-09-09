@@ -193,25 +193,7 @@
 </section>
 
 <style>
-	@keyframes float-glow {
-		0%,
-		100% {
-			transform: translate(0, 0) scale(1);
-		}
-		50% {
-			transform: translate(30px, -30px) scale(1.1);
-		}
-	}
-
-	@keyframes float-glow-reverse {
-		0%,
-		100% {
-			transform: translate(0, 0) scale(1);
-		}
-		50% {
-			transform: translate(-30px, 30px) scale(1.1);
-		}
-	}
+	/* float-glow animations defined in app.css */
 
 	.bg-gradient-radial {
 		background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));

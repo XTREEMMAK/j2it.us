@@ -5,7 +5,54 @@ All notable changes to the J2IT website will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.0] - 2025-01-03
+## [1.0.0] - 2025-01-09
+
+### Added
+
+- **SEO Enhancements**
+  - Canonical URL tag for proper page indexing
+  - Enhanced Local Business schema markup with comprehensive fields (geo coordinates, opening hours, services, etc.)
+- **Code Quality & DevOps**
+  - Prettier code formatting with automated linting
+  - GitHub Actions workflow with build verification
+  - Version tracking starting at 1.0.0
+- **Form Improvements**
+  - Separate webhook URLs for contact and health-check forms
+  - Fixed optional field validation in health-check form
+  - Proper handling of dropdown values in number of computers field
+
+### Changed
+
+- Updated ProfileIntro paragraph text sizing to match HeroSection (text-xl sm:text-2xl)
+- Improved form validation schemas with proper empty field handling
+- Enhanced error message display in forms
+
+### Fixed
+
+- Health check form validation now accepts actual dropdown values (1-3, 4-6, etc.)
+- Optional form fields properly allow empty submissions
+- Resolved "Please enter a valid number" error for computer count dropdown
+
+### Refactored
+
+- **Environment Variable System**
+  - Created dynamic structured data system using environment variables
+  - Added 21 new environment variables for complete business data configuration
+  - Built `structuredData.js` utility to generate LocalBusiness schema from env vars
+  - Refactored `+layout.svelte` to use dynamic data instead of hardcoded values
+- **GitHub Actions Optimization**
+  - Created `.env.production.template` with placeholder system
+  - Streamlined deployment workflow using template substitution
+  - Reduced main.yml heredoc complexity by 90%
+  - Balanced approach: secrets for location/contact data, hardcoded for static info
+
+- **Code Quality Improvements**
+  - Started code consolidation and optimization process
+  - Identified areas for component reusability improvements
+  - Created shared utilities (Spinner, throttle, formHandler)
+  - Optimized mouse tracking with throttling for 60fps performance
+
+## [0.9.0] - 2025-01-03
 
 ### Added
 

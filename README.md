@@ -1,42 +1,211 @@
-# J2IT - Website
+# J²IT: IT and Web Solutions
 
-This is the official website for J2it.us.
+The official website for J²IT, providing affordable IT support and web solutions for small businesses in Florida.
 
-## Creating a project
+## 🚀 Version 1.0.0
 
-If you're seeing this, you've probably already done this step. Congrats!
+This codebase has been optimized for performance, maintainability, and SEO. See [CHANGELOG.md](./CHANGELOG.md) for detailed release notes.
 
-```bash
-# create a new project in the current directory
-npx sv create
+## 🛠 Technology Stack
 
-# create a new project in my-app
-npx sv create my-app
+- **Framework**: SvelteKit with Svelte 5
+- **Styling**: Tailwind CSS v4 with custom design system
+- **Build Tool**: Vite
+- **Deployment**: Node.js adapter for server-side rendering
+- **Font**: Inter (Google Fonts)
+- **Validation**: Valibot for form schemas
+- **Security**: JWT authentication, rate limiting, input sanitization
+
+## 📁 Project Structure
+
+```
+src/
+├── lib/
+│   ├── components/
+│   │   ├── forms/           # Contact and health-check forms
+│   │   ├── layout/          # Navigation, hero, sections
+│   │   └── ui/              # Reusable UI components (Spinner)
+│   ├── schemas/             # Valibot validation schemas
+│   ├── server/              # Server-side utilities (webhook, auth)
+│   ├── stores/              # Svelte stores (features, scroll)
+│   └── utils/               # Shared utilities (throttle, animations, structuredData)
+├── routes/                  # SvelteKit routes and pages
+├── static/                  # Static assets
+└── .env.production.template # Template for GitHub Actions environment setup
 ```
 
-## Developing
+## 🏁 Quick Start
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Prerequisites
+
+- Node.js 22+
+- npm
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone <repository-url>
+cd j2it.com
+
+# Install dependencies
+npm install
+
+# Copy environment template
+cp .env.example .env
+```
+
+### Development
+
+```bash
+# Start development server
 npm run dev
 
-# or start the server and open the app in a new browser tab
+# Open in browser
 npm run dev -- --open
+
+# Run linting
+npm run lint
+
+# Format code
+npm run format
 ```
 
-## Building
-
-To create a production version of your app:
+### Production Build
 
 ```bash
+# Build for production
 npm run build
+
+# Preview production build
+npm run preview
 ```
 
-You can preview the production build with `npm run preview`.
+## 🔧 Environment Configuration
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Required environment variables (see `.env.example`):
 
-## Deployment
+**Core Application:**
 
-Remember to use the custom deploy.sh script when pushing to production. In order for that to also work, you need to already have the Sveltekit Node Adpater installed, and added in the jsconfig.json.
+- `PUBLIC_CDN_URL`: CDN endpoint for static assets
+- `N8N_CONTACT_WEBHOOK_URL`: Webhook for contact form submissions
+- `N8N_HEALTH_CHECK_WEBHOOK_URL`: Webhook for health-check form submissions
+- `WEBHOOK_JWT_SECRET`: Secret for webhook authentication
+
+**Business Schema.org Data:**
+
+- `PUBLIC_BUSINESS_NAME`, `PUBLIC_BUSINESS_ALT_NAME`, `PUBLIC_BUSINESS_URL`
+- `PUBLIC_BUSINESS_DESCRIPTION`, `PUBLIC_BUSINESS_PHONE`, `PUBLIC_BUSINESS_EMAIL`
+- `PUBLIC_BUSINESS_PRICE_RANGE`, `PUBLIC_BUSINESS_STREET`, `PUBLIC_BUSINESS_CITY`
+- `PUBLIC_BUSINESS_STATE`, `PUBLIC_BUSINESS_ZIP`, `PUBLIC_BUSINESS_COUNTRY`
+- `PUBLIC_BUSINESS_LATITUDE`, `PUBLIC_BUSINESS_LONGITUDE`
+- `PUBLIC_FOUNDER_NAME`, `PUBLIC_FOUNDER_TITLE`
+- `PUBLIC_BUSINESS_AREA_SERVED`, `PUBLIC_BUSINESS_HOURS_DAYS`
+- `PUBLIC_BUSINESS_HOURS_OPEN`, `PUBLIC_BUSINESS_HOURS_CLOSE`
+
+**Optional:**
+
+- Tawk.to chat widget configuration
+- Rate limiting settings
+- Feature toggles
+
+## 🚀 Deployment
+
+### GitHub Actions
+
+The project includes automated deployment via GitHub Actions:
+
+1. Linting and build verification
+2. Template-based environment variable setup using `.env.production.template`
+3. Asset deployment to DigitalOcean Spaces
+4. PM2 process management on server
+
+**Required GitHub Secrets (Location/Contact Data):**
+
+- `PUBLIC_BUSINESS_PHONE`, `PUBLIC_BUSINESS_STREET`, `PUBLIC_BUSINESS_CITY`
+- `PUBLIC_BUSINESS_STATE`, `PUBLIC_BUSINESS_ZIP`, `PUBLIC_BUSINESS_COUNTRY`
+- `PUBLIC_BUSINESS_LATITUDE`, `PUBLIC_BUSINESS_LONGITUDE`
+- Standard secrets: `SERVER_IP`, `SERVER_USERNAME`, `WEBHOOK_JWT_SECRET`, etc.
+
+**Hardcoded in Workflow (Static Business Info):**
+
+- Business name, founder info, hours, email, and other static data
+
+### Manual Deployment
+
+```bash
+# Build and deploy
+./deploy.sh
+```
+
+## 🎨 Key Features
+
+### SEO Optimized
+
+- Canonical URLs
+- Enhanced Local Business schema markup (dynamically generated from environment variables)
+- Open Graph and Twitter meta tags
+- Structured data for search engines
+
+### Performance Optimized
+
+- Throttled mouse tracking (60fps max)
+- Optimized animations and transitions
+- Lazy loading and code splitting
+- Efficient form validation
+
+### Security Features
+
+- JWT authentication for webhooks
+- Rate limiting (10 requests/minute per IP)
+- Input sanitization with DOMPurify
+- CSRF protection (SvelteKit built-in)
+
+### Forms
+
+- Contact form with validation
+- IT Health Check lead generation form
+- Real-time error handling
+- Success page with confetti animation
+
+## 🧪 Development Guidelines
+
+### Code Style
+
+- Prettier formatting enforced
+- Consistent component patterns
+- Shared utilities for common operations
+- TypeScript-ready JSDoc comments
+
+### Component Architecture
+
+- Reusable UI components in `/ui/`
+- Business logic separated from presentation
+- Consistent prop patterns
+- Shared validation schemas
+
+### Performance Considerations
+
+- Throttled event handlers
+- Optimized animations
+- Minimal bundle size
+- Server-side rendering
+
+## 📚 Additional Documentation
+
+- [CHANGELOG.md](./CHANGELOG.md) - Version history and release notes
+- [CLAUDE.md](./CLAUDE.md) - Development commands and architecture notes
+- Component documentation in respective files
+
+## 🤝 Contributing
+
+This is a private project for J²IT business. For internal development:
+
+1. Create feature branches from `main`
+2. Follow existing code patterns
+3. Run linting and tests before committing
+4. Update CHANGELOG.md for significant changes
+
+## 📄 License
+
+Private - All rights reserved by J²IT: IT and Web Solutions
