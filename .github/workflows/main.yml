@@ -36,45 +36,55 @@ jobs:
 
       - name: Create production .env file from template
         run: |
-          # Replace template placeholders with secrets
-          sed 's/{{PUBLIC_CDN_URL}}/${{ secrets.PUBLIC_CDN_URL }}/g; \
-               s/{{WEBHOOK_JWT_SECRET}}/${{ secrets.WEBHOOK_JWT_SECRET }}/g; \
-               s/{{N8N_CONTACT_WEBHOOK_URL}}/${{ secrets.N8N_CONTACT_WEBHOOK_URL }}/g; \
-               s/{{N8N_HEALTH_CHECK_WEBHOOK_URL}}/${{ secrets.N8N_HEALTH_CHECK_WEBHOOK_URL }}/g; \
-               s/{{PUBLIC_TAWK_PROPERTY_ID}}/${{ secrets.PUBLIC_TAWK_PROPERTY_ID }}/g; \
-               s/{{PUBLIC_TAWK_WIDGET_ID}}/${{ secrets.PUBLIC_TAWK_WIDGET_ID }}/g; \
-               s/{{PUBLIC_BUSINESS_NAME}}/J² IT Solutions/g; \
-               s/{{PUBLIC_BUSINESS_ALT_NAME}}/J2IT/g; \
-               s/{{PUBLIC_BUSINESS_URL}}/https:\/\/www.j2it.us/g; \
-               s/{{PUBLIC_BUSINESS_DESCRIPTION}}/Affordable IT support and web solutions for small businesses. Flat monthly pricing, no contracts, personal service./g; \
-               s/{{PUBLIC_BUSINESS_PHONE}}/${{ secrets.PUBLIC_BUSINESS_PHONE }}/g; \
-               s/{{PUBLIC_BUSINESS_EMAIL}}/contact@j2it.us/g; \
-               s/{{PUBLIC_BUSINESS_PRICE_RANGE}}/\$\$/g; \
-               s/{{PUBLIC_BUSINESS_STREET}}/${{ secrets.PUBLIC_BUSINESS_STREET }}/g; \
-               s/{{PUBLIC_BUSINESS_CITY}}/${{ secrets.PUBLIC_BUSINESS_CITY }}/g; \
-               s/{{PUBLIC_BUSINESS_STATE}}/${{ secrets.PUBLIC_BUSINESS_STATE }}/g; \
-               s/{{PUBLIC_BUSINESS_ZIP}}/${{ secrets.PUBLIC_BUSINESS_ZIP }}/g; \
-               s/{{PUBLIC_BUSINESS_COUNTRY}}/${{ secrets.PUBLIC_BUSINESS_COUNTRY }}/g; \
-               s/{{PUBLIC_BUSINESS_LATITUDE}}/${{ secrets.PUBLIC_BUSINESS_LATITUDE }}/g; \
-               s/{{PUBLIC_BUSINESS_LONGITUDE}}/${{ secrets.PUBLIC_BUSINESS_LONGITUDE }}/g; \
-               s/{{PUBLIC_FOUNDER_NAME}}/Jamaal Ephriam/g; \
-               s/{{PUBLIC_FOUNDER_TITLE}}/IT Solutions Expert/g; \
-               s/{{PUBLIC_BUSINESS_AREA_SERVED}}/Florida/g; \
-               s/{{PUBLIC_BUSINESS_HOURS_DAYS}}/Monday,Tuesday,Wednesday,Thursday,Friday/g; \
-               s/{{PUBLIC_BUSINESS_HOURS_OPEN}}/09:00/g; \
-               s/{{PUBLIC_BUSINESS_HOURS_CLOSE}}/17:00/g; \
-               s/{{CARD_JAMAAL_NAME}}/J² IT Solutions/g; \
-               s/{{CARD_JAMAAL_PERSON}}/Jamaal Ephriam/g; \
-               s/{{CARD_JAMAAL_TITLE}}/IT Solutions Expert/g; \
-               s/{{CARD_JAMAAL_PHONE}}/754-423-8730/g; \
-               s/{{CARD_JAMAAL_EMAIL}}/jamaal@j2it.us/g; \
-               s/{{CARD_JAMAAL_STREET}}//g; \
-               s/{{CARD_JAMAAL_CITY}}/Coconut Creek/g; \
-               s/{{CARD_JAMAAL_STATE}}/FL/g; \
-               s/{{CARD_JAMAAL_ZIP}}/33073/g; \
-               s/{{CARD_JAMAAL_COUNTRY}}/USA/g; \
-               s/{{CARD_JAMAAL_IMAGE}}/Jamaal_Photo.webp/g' \
-               .env.production.template > .env
+          # Create .env file by replacing template placeholders
+          cp .env.production.template .env
+          
+          # Replace secrets (use | as delimiter to avoid conflicts with URLs)
+          sed -i 's|{{PUBLIC_CDN_URL}}|${{ secrets.PUBLIC_CDN_URL }}|g' .env
+          sed -i 's|{{WEBHOOK_JWT_SECRET}}|${{ secrets.WEBHOOK_JWT_SECRET }}|g' .env
+          sed -i 's|{{N8N_CONTACT_WEBHOOK_URL}}|${{ secrets.N8N_CONTACT_WEBHOOK_URL }}|g' .env
+          sed -i 's|{{N8N_HEALTH_CHECK_WEBHOOK_URL}}|${{ secrets.N8N_HEALTH_CHECK_WEBHOOK_URL }}|g' .env
+          sed -i 's|{{PUBLIC_TAWK_PROPERTY_ID}}|${{ secrets.PUBLIC_TAWK_PROPERTY_ID }}|g' .env
+          sed -i 's|{{PUBLIC_TAWK_WIDGET_ID}}|${{ secrets.PUBLIC_TAWK_WIDGET_ID }}|g' .env
+          
+          # Replace hardcoded values (use | as delimiter)
+          sed -i 's|{{PUBLIC_BUSINESS_NAME}}|J² IT Solutions|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_ALT_NAME}}|J2IT|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_URL}}|https://www.j2it.us|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_DESCRIPTION}}|Affordable IT support and web solutions for small businesses. Flat monthly pricing, no contracts, personal service.|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_EMAIL}}|contact@j2it.us|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_PRICE_RANGE}}|$$|g' .env
+          sed -i 's|{{PUBLIC_FOUNDER_NAME}}|Jamaal Ephriam|g' .env
+          sed -i 's|{{PUBLIC_FOUNDER_TITLE}}|IT Solutions Expert|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_AREA_SERVED}}|Florida|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_HOURS_DAYS}}|Monday,Tuesday,Wednesday,Thursday,Friday|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_HOURS_OPEN}}|09:00|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_HOURS_CLOSE}}|17:00|g' .env
+          
+          # Replace location secrets (use | as delimiter)
+          sed -i 's|{{PUBLIC_BUSINESS_PHONE}}|${{ secrets.PUBLIC_BUSINESS_PHONE }}|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_STREET}}|${{ secrets.PUBLIC_BUSINESS_STREET }}|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_CITY}}|${{ secrets.PUBLIC_BUSINESS_CITY }}|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_STATE}}|${{ secrets.PUBLIC_BUSINESS_STATE }}|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_ZIP}}|${{ secrets.PUBLIC_BUSINESS_ZIP }}|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_COUNTRY}}|${{ secrets.PUBLIC_BUSINESS_COUNTRY }}|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_LATITUDE}}|${{ secrets.PUBLIC_BUSINESS_LATITUDE }}|g' .env
+          sed -i 's|{{PUBLIC_BUSINESS_LONGITUDE}}|${{ secrets.PUBLIC_BUSINESS_LONGITUDE }}|g' .env
+          
+          # Replace card info (use | as delimiter)
+          sed -i 's|{{CARD_JAMAAL_NAME}}|J² IT Solutions|g' .env
+          sed -i 's|{{CARD_JAMAAL_PERSON}}|Jamaal Ephriam|g' .env
+          sed -i 's|{{CARD_JAMAAL_TITLE}}|IT Solutions Expert|g' .env
+          sed -i 's|{{CARD_JAMAAL_PHONE}}|754-423-8730|g' .env
+          sed -i 's|{{CARD_JAMAAL_EMAIL}}|jamaal@j2it.us|g' .env
+          sed -i 's|{{CARD_JAMAAL_STREET}}||g' .env
+          sed -i 's|{{CARD_JAMAAL_CITY}}|Coconut Creek|g' .env
+          sed -i 's|{{CARD_JAMAAL_STATE}}|FL|g' .env
+          sed -i 's|{{CARD_JAMAAL_ZIP}}|33073|g' .env
+          sed -i 's|{{CARD_JAMAAL_COUNTRY}}|USA|g' .env
+          sed -i 's|{{CARD_JAMAAL_IMAGE}}|Jamaal_Photo.webp|g' .env
+          
+          # Deploy to server
           scp .env ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/.env
 
       - name: Build project
