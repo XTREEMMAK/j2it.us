@@ -38,7 +38,7 @@ jobs:
         run: |
           # Create .env file by replacing template placeholders
           cp .env.production.template .env
-          
+
           # Replace secrets (use | as delimiter to avoid conflicts with URLs)
           sed -i 's|{{PUBLIC_CDN_URL}}|${{ secrets.PUBLIC_CDN_URL }}|g' .env
           sed -i 's|{{WEBHOOK_JWT_SECRET}}|${{ secrets.WEBHOOK_JWT_SECRET }}|g' .env
@@ -46,7 +46,7 @@ jobs:
           sed -i 's|{{N8N_HEALTH_CHECK_WEBHOOK_URL}}|${{ secrets.N8N_HEALTH_CHECK_WEBHOOK_URL }}|g' .env
           sed -i 's|{{PUBLIC_TAWK_PROPERTY_ID}}|${{ secrets.PUBLIC_TAWK_PROPERTY_ID }}|g' .env
           sed -i 's|{{PUBLIC_TAWK_WIDGET_ID}}|${{ secrets.PUBLIC_TAWK_WIDGET_ID }}|g' .env
-          
+
           # Replace hardcoded values (use | as delimiter)
           sed -i 's|{{PUBLIC_BUSINESS_NAME}}|J² IT Solutions|g' .env
           sed -i 's|{{PUBLIC_BUSINESS_ALT_NAME}}|J2IT|g' .env
@@ -60,7 +60,7 @@ jobs:
           sed -i 's|{{PUBLIC_BUSINESS_HOURS_DAYS}}|Monday,Tuesday,Wednesday,Thursday,Friday|g' .env
           sed -i 's|{{PUBLIC_BUSINESS_HOURS_OPEN}}|09:00|g' .env
           sed -i 's|{{PUBLIC_BUSINESS_HOURS_CLOSE}}|17:00|g' .env
-          
+
           # Replace location secrets (use | as delimiter)
           sed -i 's|{{PUBLIC_BUSINESS_PHONE}}|${{ secrets.PUBLIC_BUSINESS_PHONE }}|g' .env
           sed -i 's|{{PUBLIC_BUSINESS_STREET}}|${{ secrets.PUBLIC_BUSINESS_STREET }}|g' .env
@@ -70,7 +70,7 @@ jobs:
           sed -i 's|{{PUBLIC_BUSINESS_COUNTRY}}|${{ secrets.PUBLIC_BUSINESS_COUNTRY }}|g' .env
           sed -i 's|{{PUBLIC_BUSINESS_LATITUDE}}|${{ secrets.PUBLIC_BUSINESS_LATITUDE }}|g' .env
           sed -i 's|{{PUBLIC_BUSINESS_LONGITUDE}}|${{ secrets.PUBLIC_BUSINESS_LONGITUDE }}|g' .env
-          
+
           # Replace card info (use | as delimiter)
           sed -i 's|{{CARD_JAMAAL_NAME}}|J² IT Solutions|g' .env
           sed -i 's|{{CARD_JAMAAL_PERSON}}|Jamaal Ephriam|g' .env
@@ -83,7 +83,7 @@ jobs:
           sed -i 's|{{CARD_JAMAAL_ZIP}}|33073|g' .env
           sed -i 's|{{CARD_JAMAAL_COUNTRY}}|USA|g' .env
           sed -i 's|{{CARD_JAMAAL_IMAGE}}|Jamaal_Photo.webp|g' .env
-          
+
           # Deploy to server
           scp .env ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/.env
 
