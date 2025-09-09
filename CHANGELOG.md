@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.0] - 2025-01-03
 
 ### Added
+
 - Complete website redesign with dark theme and modern animations
 - Navigation component with fixed header and mobile menu
 - Hero section with gradient background and CTAs
@@ -28,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Responsive design for all screen sizes
 
 ### Changed
+
 - Migrated from light theme to dark theme (#0f0f1a background)
 - Updated layout structure with new navigation system
 - Replaced old Header, Services, and Contact components
@@ -35,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced security with form validation and sanitization
 
 ### Security
+
 - Added JWT authentication for webhook endpoints
 - Implemented rate limiting to prevent abuse
 - Added input sanitization with DOMPurify
@@ -42,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Protected forms with CSRF tokens (SvelteKit built-in)
 
 ### Dependencies
+
 - Added `valibot` for form validation
 - Added `isomorphic-dompurify` for XSS protection
 - Added `jsonwebtoken` for JWT authentication
@@ -50,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - Previous Version
 
 ### Features
+
 - Basic SvelteKit website
 - Simple contact form with iframe
 - Service listing

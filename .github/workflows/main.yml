@@ -9,105 +9,104 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@main
+      - name: Checkout code
+        uses: actions/checkout@main
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '22'
-        cache: 'npm'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run linting
-      run: npm run lint
+      - name: Run linting
+        run: npm run lint
 
-    - name: Add server to known_hosts
-      run: |
-        mkdir -p ~/.ssh
-        ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
-    - name: Install SSH key
-      uses: webfactory/ssh-agent@v0.9.0
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Create production .env file
+        run: |
+          cat << EOF > .env
+          PUBLIC_CDN_URL=${{ secrets.PUBLIC_CDN_URL }}
+          CDN_ENDPOINT=nyc3.digitaloceanspaces.com
+          CDN_BUCKET=s3://j2it
+          GIT_BRANCH=main
+          GIT_REMOTE=origin
 
-    - name: Create production .env file
-      run: |
-        cat << EOF > .env
-        PUBLIC_CDN_URL=${{ secrets.PUBLIC_CDN_URL }}
-        CDN_ENDPOINT=nyc3.digitaloceanspaces.com
-        CDN_BUCKET=s3://j2it
-        GIT_BRANCH=main
-        GIT_REMOTE=origin
-        
-        # Webhook Configuration
-        WEBHOOK_JWT_SECRET=${{ secrets.WEBHOOK_JWT_SECRET }}
-        N8N_CONTACT_WEBHOOK_URL=${{ secrets.N8N_CONTACT_WEBHOOK_URL }}
-        N8N_HEALTH_CHECK_WEBHOOK_URL=${{ secrets.N8N_HEALTH_CHECK_WEBHOOK_URL }}
-        
-        # Rate Limiting  
-        RATE_LIMIT_WINDOW=60000
-        RATE_LIMIT_MAX_REQUESTS=10
-        
-        # Tawk.to Configuration
-        PUBLIC_TAWK_PROPERTY_ID=${{ secrets.PUBLIC_TAWK_PROPERTY_ID }}
-        PUBLIC_TAWK_WIDGET_ID=${{ secrets.PUBLIC_TAWK_WIDGET_ID }}
-        
-        # Feature Toggles
-        PUBLIC_SCHEDULE_CALL_ENABLED=false
-        PUBLIC_INSIGHTS_ENABLED=false
-        
-        # Business Card Configuration
-        CARD_JAMAAL_NAME=J² IT Solutions
-        CARD_JAMAAL_PERSON=Jamaal Ephriam
-        CARD_JAMAAL_TITLE=IT Solutions Expert
-        CARD_JAMAAL_PHONE=754-423-8730
-        CARD_JAMAAL_EMAIL=jamaal@j2it.us
-        CARD_JAMAAL_STREET=
-        CARD_JAMAAL_CITY=Coconut Creek
-        CARD_JAMAAL_STATE=FL
-        CARD_JAMAAL_ZIP=33073
-        CARD_JAMAAL_COUNTRY=USA
-        CARD_JAMAAL_IMAGE=Jamaal_Photo.webp
-        EOF
-        scp .env ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/.env
+          # Webhook Configuration
+          WEBHOOK_JWT_SECRET=${{ secrets.WEBHOOK_JWT_SECRET }}
+          N8N_CONTACT_WEBHOOK_URL=${{ secrets.N8N_CONTACT_WEBHOOK_URL }}
+          N8N_HEALTH_CHECK_WEBHOOK_URL=${{ secrets.N8N_HEALTH_CHECK_WEBHOOK_URL }}
 
-    - name: Build project
-      run: npm run build
+          # Rate Limiting  
+          RATE_LIMIT_WINDOW=60000
+          RATE_LIMIT_MAX_REQUESTS=10
 
-    - name: Verify build completed
-      run: |
-        if [ ! -f "build/index.js" ]; then
-          echo "Build failed - index.js not found"
-          exit 1
-        fi
-        echo "Build completed successfully"
+          # Tawk.to Configuration
+          PUBLIC_TAWK_PROPERTY_ID=${{ secrets.PUBLIC_TAWK_PROPERTY_ID }}
+          PUBLIC_TAWK_WIDGET_ID=${{ secrets.PUBLIC_TAWK_WIDGET_ID }}
 
-    - name: Upload build and dependencies
-      run: |
-        ls -la build/
-        scp -r build ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/
-        scp package.json package-lock.json ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/
+          # Feature Toggles
+          PUBLIC_SCHEDULE_CALL_ENABLED=false
+          PUBLIC_INSIGHTS_ENABLED=false
 
-    - name: SSH and run post-deploy commands
-      run: |
-        ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
-        set -e
+          # Business Card Configuration
+          CARD_JAMAAL_NAME=J² IT Solutions
+          CARD_JAMAAL_PERSON=Jamaal Ephriam
+          CARD_JAMAAL_TITLE=IT Solutions Expert
+          CARD_JAMAAL_PHONE=754-423-8730
+          CARD_JAMAAL_EMAIL=jamaal@j2it.us
+          CARD_JAMAAL_STREET=
+          CARD_JAMAAL_CITY=Coconut Creek
+          CARD_JAMAAL_STATE=FL
+          CARD_JAMAAL_ZIP=33073
+          CARD_JAMAAL_COUNTRY=USA
+          CARD_JAMAAL_IMAGE=Jamaal_Photo.webp
+          EOF
+          scp .env ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/.env
 
-        cd ${{ secrets.SERVER_DIRECTORY }}
+      - name: Build project
+        run: npm run build
 
-        echo "Cleaning up old node_modules..."
-        rm -rf node_modules
+      - name: Verify build completed
+        run: |
+          if [ ! -f "build/index.js" ]; then
+            echo "Build failed - index.js not found"
+            exit 1
+          fi
+          echo "Build completed successfully"
 
-        echo "Installing production dependencies..."
-        npm ci --omit=dev
+      - name: Upload build and dependencies
+        run: |
+          ls -la build/
+          scp -r build ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/
+          scp package.json package-lock.json ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/
 
-        echo "Restarting app with PM2..."
-        pm2 delete j2it.us || true
-        PORT=${{ secrets.APP_PORT }} pm2 start build/index.js --name j2it.us
-        pm2 save
-        EOF
+      - name: SSH and run post-deploy commands
+        run: |
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
+          set -e
+
+          cd ${{ secrets.SERVER_DIRECTORY }}
+
+          echo "Cleaning up old node_modules..."
+          rm -rf node_modules
+
+          echo "Installing production dependencies..."
+          npm ci --omit=dev
+
+          echo "Restarting app with PM2..."
+          pm2 delete j2it.us || true
+          PORT=${{ secrets.APP_PORT }} pm2 start build/index.js --name j2it.us
+          pm2 save
+          EOF

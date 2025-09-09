@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 ### Core Commands
+
 - `npm run dev` - Start development server on default port (5173)
 - `npm run dev -- --open` - Start dev server and open in browser
 - `npm run build` - Build for production (uses Node adapter)
@@ -12,6 +13,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm install` - Install dependencies
 
 ### Deployment
+
 - `./deploy.sh` - Custom deployment script that:
   1. Pushes code to GitHub (triggers GitHub Actions)
   2. Syncs static assets to DigitalOcean Spaces CDN
@@ -22,6 +24,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a **SvelteKit** application with server-side rendering, configured for Node.js deployment:
 
 ### Technology Stack
+
 - **Framework**: SvelteKit with Svelte 5
 - **Styling**: Tailwind CSS v4 (configured via Vite plugin)
 - **Build Tool**: Vite
