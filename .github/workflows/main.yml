@@ -38,7 +38,7 @@ jobs:
         run: |
           # Create .env file by replacing template placeholders
           cp .env.production.template .env
-          
+
           # Debug: Check if secrets contain placeholder patterns
           if [[ "${{ secrets.WEBHOOK_JWT_SECRET }}" == *"{{"* ]]; then
             echo "ERROR: WEBHOOK_JWT_SECRET secret contains '{{' - it appears to be malformed!"
