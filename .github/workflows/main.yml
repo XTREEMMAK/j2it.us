@@ -38,6 +38,13 @@ jobs:
         run: |
           # Create .env file by replacing template placeholders
           cp .env.production.template .env
+          
+          # Debug: Check if secrets contain placeholder patterns
+          if [[ "${{ secrets.WEBHOOK_JWT_SECRET }}" == *"{{"* ]]; then
+            echo "ERROR: WEBHOOK_JWT_SECRET secret contains '{{' - it appears to be malformed!"
+            echo "Please update the WEBHOOK_JWT_SECRET secret in GitHub to contain only the actual secret value."
+            exit 1
+          fi
 
           # Replace secrets (use | as delimiter to avoid conflicts with URLs)
           sed -i 's|{{PUBLIC_CDN_URL}}|${{ secrets.PUBLIC_CDN_URL }}|g' .env
