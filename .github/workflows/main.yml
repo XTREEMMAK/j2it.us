@@ -46,13 +46,21 @@ jobs:
             exit 1
           fi
 
-          # Replace secrets (use | as delimiter to avoid conflicts with URLs)
-          sed -i 's|{{PUBLIC_CDN_URL}}|${{ secrets.PUBLIC_CDN_URL }}|g' .env
-          sed -i 's|{{WEBHOOK_JWT_SECRET}}|${{ secrets.WEBHOOK_JWT_SECRET }}|g' .env
-          sed -i 's|{{N8N_CONTACT_WEBHOOK_URL}}|${{ secrets.N8N_CONTACT_WEBHOOK_URL }}|g' .env
-          sed -i 's|{{N8N_HEALTH_CHECK_WEBHOOK_URL}}|${{ secrets.N8N_HEALTH_CHECK_WEBHOOK_URL }}|g' .env
-          sed -i 's|{{PUBLIC_TAWK_PROPERTY_ID}}|${{ secrets.PUBLIC_TAWK_PROPERTY_ID }}|g' .env
-          sed -i 's|{{PUBLIC_TAWK_WIDGET_ID}}|${{ secrets.PUBLIC_TAWK_WIDGET_ID }}|g' .env
+          # Replace secrets (using environment variables to handle special characters)
+          export PUBLIC_CDN_URL="${{ secrets.PUBLIC_CDN_URL }}"
+          export WEBHOOK_JWT_SECRET="${{ secrets.WEBHOOK_JWT_SECRET }}"
+          export N8N_CONTACT_WEBHOOK_URL="${{ secrets.N8N_CONTACT_WEBHOOK_URL }}"
+          export N8N_HEALTH_CHECK_WEBHOOK_URL="${{ secrets.N8N_HEALTH_CHECK_WEBHOOK_URL }}"
+          export PUBLIC_TAWK_PROPERTY_ID="${{ secrets.PUBLIC_TAWK_PROPERTY_ID }}"
+          export PUBLIC_TAWK_WIDGET_ID="${{ secrets.PUBLIC_TAWK_WIDGET_ID }}"
+
+          # Use perl for safer replacement that handles special characters
+          perl -pi -e 's/\{\{PUBLIC_CDN_URL\}\}/$ENV{PUBLIC_CDN_URL}/g' .env
+          perl -pi -e 's/\{\{WEBHOOK_JWT_SECRET\}\}/$ENV{WEBHOOK_JWT_SECRET}/g' .env
+          perl -pi -e 's/\{\{N8N_CONTACT_WEBHOOK_URL\}\}/$ENV{N8N_CONTACT_WEBHOOK_URL}/g' .env
+          perl -pi -e 's/\{\{N8N_HEALTH_CHECK_WEBHOOK_URL\}\}/$ENV{N8N_HEALTH_CHECK_WEBHOOK_URL}/g' .env
+          perl -pi -e 's/\{\{PUBLIC_TAWK_PROPERTY_ID\}\}/$ENV{PUBLIC_TAWK_PROPERTY_ID}/g' .env
+          perl -pi -e 's/\{\{PUBLIC_TAWK_WIDGET_ID\}\}/$ENV{PUBLIC_TAWK_WIDGET_ID}/g' .env
 
           # Replace hardcoded values (use | as delimiter)
           sed -i 's|{{PUBLIC_BUSINESS_NAME}}|J² IT Solutions|g' .env
@@ -68,15 +76,24 @@ jobs:
           sed -i 's|{{PUBLIC_BUSINESS_HOURS_OPEN}}|09:00|g' .env
           sed -i 's|{{PUBLIC_BUSINESS_HOURS_CLOSE}}|17:00|g' .env
 
-          # Replace location secrets (use | as delimiter)
-          sed -i 's|{{PUBLIC_BUSINESS_PHONE}}|${{ secrets.PUBLIC_BUSINESS_PHONE }}|g' .env
-          sed -i 's|{{PUBLIC_BUSINESS_STREET}}|${{ secrets.PUBLIC_BUSINESS_STREET }}|g' .env
-          sed -i 's|{{PUBLIC_BUSINESS_CITY}}|${{ secrets.PUBLIC_BUSINESS_CITY }}|g' .env
-          sed -i 's|{{PUBLIC_BUSINESS_STATE}}|${{ secrets.PUBLIC_BUSINESS_STATE }}|g' .env
-          sed -i 's|{{PUBLIC_BUSINESS_ZIP}}|${{ secrets.PUBLIC_BUSINESS_ZIP }}|g' .env
-          sed -i 's|{{PUBLIC_BUSINESS_COUNTRY}}|${{ secrets.PUBLIC_BUSINESS_COUNTRY }}|g' .env
-          sed -i 's|{{PUBLIC_BUSINESS_LATITUDE}}|${{ secrets.PUBLIC_BUSINESS_LATITUDE }}|g' .env
-          sed -i 's|{{PUBLIC_BUSINESS_LONGITUDE}}|${{ secrets.PUBLIC_BUSINESS_LONGITUDE }}|g' .env
+          # Replace location secrets (using environment variables)
+          export PUBLIC_BUSINESS_PHONE="${{ secrets.PUBLIC_BUSINESS_PHONE }}"
+          export PUBLIC_BUSINESS_STREET="${{ secrets.PUBLIC_BUSINESS_STREET }}"
+          export PUBLIC_BUSINESS_CITY="${{ secrets.PUBLIC_BUSINESS_CITY }}"
+          export PUBLIC_BUSINESS_STATE="${{ secrets.PUBLIC_BUSINESS_STATE }}"
+          export PUBLIC_BUSINESS_ZIP="${{ secrets.PUBLIC_BUSINESS_ZIP }}"
+          export PUBLIC_BUSINESS_COUNTRY="${{ secrets.PUBLIC_BUSINESS_COUNTRY }}"
+          export PUBLIC_BUSINESS_LATITUDE="${{ secrets.PUBLIC_BUSINESS_LATITUDE }}"
+          export PUBLIC_BUSINESS_LONGITUDE="${{ secrets.PUBLIC_BUSINESS_LONGITUDE }}"
+
+          perl -pi -e 's/\{\{PUBLIC_BUSINESS_PHONE\}\}/$ENV{PUBLIC_BUSINESS_PHONE}/g' .env
+          perl -pi -e 's/\{\{PUBLIC_BUSINESS_STREET\}\}/$ENV{PUBLIC_BUSINESS_STREET}/g' .env
+          perl -pi -e 's/\{\{PUBLIC_BUSINESS_CITY\}\}/$ENV{PUBLIC_BUSINESS_CITY}/g' .env
+          perl -pi -e 's/\{\{PUBLIC_BUSINESS_STATE\}\}/$ENV{PUBLIC_BUSINESS_STATE}/g' .env
+          perl -pi -e 's/\{\{PUBLIC_BUSINESS_ZIP\}\}/$ENV{PUBLIC_BUSINESS_ZIP}/g' .env
+          perl -pi -e 's/\{\{PUBLIC_BUSINESS_COUNTRY\}\}/$ENV{PUBLIC_BUSINESS_COUNTRY}/g' .env
+          perl -pi -e 's/\{\{PUBLIC_BUSINESS_LATITUDE\}\}/$ENV{PUBLIC_BUSINESS_LATITUDE}/g' .env
+          perl -pi -e 's/\{\{PUBLIC_BUSINESS_LONGITUDE\}\}/$ENV{PUBLIC_BUSINESS_LONGITUDE}/g' .env
 
           # Replace card info (use | as delimiter)
           sed -i 's|{{CARD_JAMAAL_NAME}}|J² IT Solutions|g' .env
