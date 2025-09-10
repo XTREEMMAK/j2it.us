@@ -154,6 +154,7 @@ jobs:
 
           echo "Restarting app with PM2..."
           pm2 delete j2it.us || true
-          PORT=${{ secrets.APP_PORT }} pm2 start build/index.js --name j2it.us --node-args="-r dotenv/config"
+          # Load all environment variables from .env file before starting PM2
+          set -a && source .env && set +a && PORT=${{ secrets.APP_PORT }} pm2 start build/index.js --name j2it.us
           pm2 save
           EOF
