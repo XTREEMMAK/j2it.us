@@ -1,4 +1,3 @@
-import { env } from '$env/dynamic/private';
 import { PUBLIC_CDN_URL } from '$env/static/public';
 
 /**
@@ -10,7 +9,7 @@ export function getCardConfig(id = 'default') {
 	const prefix = `CARD_${id.toUpperCase()}_`;
 
 	// Check if this card configuration exists
-	const name = env[`${prefix}NAME`];
+	const name = process.env[`${prefix}NAME`];
 
 	if (!name && id !== 'default') {
 		// If no card found with this ID, return null
@@ -19,25 +18,25 @@ export function getCardConfig(id = 'default') {
 
 	// Return card configuration
 	return {
-		name: env[`${prefix}NAME`] || 'Business Name',
-		person: env[`${prefix}PERSON`] || 'Your Name',
-		title: env[`${prefix}TITLE`] || 'Your Title',
-		company: env[`${prefix}COMPANY`] || 'J²it: IT and Web Solutions',
-		phone: env[`${prefix}PHONE`] || '',
-		email: env[`${prefix}EMAIL`] || 'contact@j2it.us',
-		website: env[`${prefix}WEBSITE`] || 'https://j2it.us',
+		name: process.env[`${prefix}NAME`] || 'Business Name',
+		person: process.env[`${prefix}PERSON`] || 'Your Name',
+		title: process.env[`${prefix}TITLE`] || 'Your Title',
+		company: process.env[`${prefix}COMPANY`] || 'J²it: IT and Web Solutions',
+		phone: process.env[`${prefix}PHONE`] || '',
+		email: process.env[`${prefix}EMAIL`] || 'contact@j2it.us',
+		website: process.env[`${prefix}WEBSITE`] || 'https://j2it.us',
 		address: {
-			street: env[`${prefix}STREET`] || '',
-			city: env[`${prefix}CITY`] || 'Miami',
-			state: env[`${prefix}STATE`] || 'FL',
-			zip: env[`${prefix}ZIP`] || '00000',
-			country: env[`${prefix}COUNTRY`] || 'USA'
+			street: process.env[`${prefix}STREET`] || '',
+			city: process.env[`${prefix}CITY`] || 'Miami',
+			state: process.env[`${prefix}STATE`] || 'FL',
+			zip: process.env[`${prefix}ZIP`] || '00000',
+			country: process.env[`${prefix}COUNTRY`] || 'USA'
 		},
 		description:
-			env[`${prefix}DESCRIPTION`] ||
+			process.env[`${prefix}DESCRIPTION`] ||
 			'Affordable IT support for small businesses. Simple, reliable, worry-free technology management without the enterprise price tag.',
-		image: env[`${prefix}IMAGE`]
-			? `${PUBLIC_CDN_URL}/images/${env[`${prefix}IMAGE`]}`
+		image: process.env[`${prefix}IMAGE`]
+			? `${PUBLIC_CDN_URL}/images/${process.env[`${prefix}IMAGE`]}`
 			: `${PUBLIC_CDN_URL}/images/Jamaal_Photo.webp`
 	};
 }
@@ -50,7 +49,7 @@ export function getAvailableCardIds() {
 	const cardIds = new Set(['default']);
 
 	// Find all unique card IDs from environment variables
-	for (const key in env) {
+	for (const key in process.env) {
 		if (key.startsWith('CARD_')) {
 			const parts = key.split('_');
 			if (parts.length >= 3) {
