@@ -2,7 +2,7 @@
 
 The official website for J²IT, providing affordable IT support and web solutions for small businesses in Florida.
 
-## 🚀 Version 1.0.0
+## 🚀 Version 1.0.1
 
 This codebase has been optimized for performance, maintainability, and SEO. See [CHANGELOG.md](./CHANGELOG.md) for detailed release notes.
 
