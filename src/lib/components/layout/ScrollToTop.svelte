@@ -23,7 +23,7 @@
 				showScrollTop = false;
 				return;
 			}
-			
+
 			// Show button when scrolled down more than 300px
 			showScrollTop = window.scrollY > 300;
 		};
@@ -38,7 +38,7 @@
 
 	function scrollToTop() {
 		if (!browser) return;
-		
+
 		window.scrollTo({
 			top: 0,
 			behavior: 'smooth'

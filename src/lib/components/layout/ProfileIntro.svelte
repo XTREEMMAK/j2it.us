@@ -100,8 +100,9 @@
 						out:animations.text.out={animations.text.outProps}
 					>
 						<p class="text-xl sm:text-2xl text-white/70 mb-4">
-							I provide enterprise-level IT protection scaled and priced for small businesses. No surprises, 
-							no hourly bills, just predictable monthly pricing that makes sense for your budget.
+							I provide enterprise-level IT protection scaled and priced for small businesses. No
+							surprises, no hourly bills, just predictable monthly pricing that makes sense for your
+							budget.
 						</p>
 
 						<p class="text-xl sm:text-2xl text-white/70 mb-6">
@@ -253,7 +254,7 @@
 		}
 
 		/* Inner content container */
-		.relative.w-80.h-80 div[class*="inset-"] {
+		.relative.w-80.h-80 div[class*='inset-'] {
 			padding: 6px !important;
 		}
 
@@ -320,7 +321,7 @@
 			margin: -10px !important;
 		}
 
-		.relative.w-80.h-80 div[class*="inset-"] {
+		.relative.w-80.h-80 div[class*='inset-'] {
 			padding: 5px !important;
 		}
 
@@ -373,7 +374,7 @@
 			margin: -10px !important;
 		}
 
-		.relative.w-80.h-80 div[class*="inset-"] {
+		.relative.w-80.h-80 div[class*='inset-'] {
 			padding: 4px !important;
 		}
 

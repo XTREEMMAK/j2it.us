@@ -34,8 +34,8 @@
 			<div class="text-center mb-12">
 				<h1 class="text-3xl sm:text-4xl font-bold mb-4">Ready to Cut Your IT Costs in Half?</h1>
 				<p class="text-xl text-white/70 max-w-3xl mx-auto">
-					Let's calculate exactly how much you can save while getting better IT protection than you have now. 
-					Most clients save $1000+ monthly on prevented issues alone.
+					Let's calculate exactly how much you can save while getting better IT protection than you
+					have now. Most clients save $1000+ monthly on prevented issues alone.
 				</p>
 			</div>
 
@@ -51,7 +51,8 @@
 						</div>
 						<h2 class="text-2xl font-bold mb-2">Send a Message</h2>
 						<p class="text-white/70">
-							Tell me about your IT challenges and I'll show you how to solve them for less than you're spending now.
+							Tell me about your IT challenges and I'll show you how to solve them for less than
+							you're spending now.
 						</p>
 					</div>
 
@@ -77,7 +78,7 @@
 						<div class="bg-white/5 rounded-xl p-8 text-center">
 							<h3 class="text-lg font-semibold mb-4">Free 20-Minute Cost-Savings Analysis</h3>
 							<p class="text-white/60 mb-6">
-								I'll analyze your current IT spending and show you exactly where you're overpaying — 
+								I'll analyze your current IT spending and show you exactly where you're overpaying —
 								typically saving businesses $2000-5000 per year.
 							</p>
 
@@ -104,14 +105,18 @@
 										icon="heroicons:check-circle"
 										class="w-5 h-5 text-[#4dd36f] mt-0.5 flex-shrink-0"
 									/>
-									<p class="text-sm text-white/70">Analysis of your current IT costs vs. what you should pay</p>
+									<p class="text-sm text-white/70">
+										Analysis of your current IT costs vs. what you should pay
+									</p>
 								</div>
 								<div class="flex items-start gap-3">
 									<Icon
 										icon="heroicons:check-circle"
 										class="w-5 h-5 text-[#4dd36f] mt-0.5 flex-shrink-0"
 									/>
-									<p class="text-sm text-white/70">Identify where you're losing money to IT problems</p>
+									<p class="text-sm text-white/70">
+										Identify where you're losing money to IT problems
+									</p>
 								</div>
 								<div class="flex items-start gap-3">
 									<Icon

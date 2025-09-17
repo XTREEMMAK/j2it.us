@@ -41,7 +41,7 @@
 		// When reviews are hidden, the actual page sections are:
 		// 0: Home, 1: About, 2: Services, 3: Process (no section 4)
 		// So no mapping needed - indicator matches page sections directly
-		
+
 		const fromPos = getDotPosition(currentlyActiveSection);
 		const toPos = getDotPosition(targetSection);
 

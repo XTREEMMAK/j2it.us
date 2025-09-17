@@ -71,7 +71,8 @@
 				<span class="gradient-text">Your IT Problems Are Really Costing You</span>
 			</h1>
 			<p class="text-xl text-white/70 mb-6">
-				Free 15-minute assessment reveals hidden IT risks and shows you exactly how to fix them — whether you work with me or not
+				Free 15-minute assessment reveals hidden IT risks and shows you exactly how to fix them —
+				whether you work with me or not
 			</p>
 		</div>
 
@@ -305,9 +306,9 @@
 						<strong>What happens next?</strong>
 					</p>
 					<p class="text-xs text-white/60">
-						I'll personally review your information and show you exactly how much you could save by switching to 
-						professional IT support. Most businesses save $1000+ per month in prevented issues. No spam, no pressure — 
-						just honest numbers based on your actual situation.
+						I'll personally review your information and show you exactly how much you could save by
+						switching to professional IT support. Most businesses save $1000+ per month in prevented
+						issues. No spam, no pressure — just honest numbers based on your actual situation.
 					</p>
 				</div>
 			</form>

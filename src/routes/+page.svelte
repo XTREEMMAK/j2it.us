@@ -32,14 +32,14 @@
 	onMount(() => {
 		// Check if mobile - use consistent breakpoint with CSS
 		const isMobile = window.innerWidth < 769;
-		
+
 		if (!isMobile) {
 			// Desktop: full-page scroll behavior
 			document.body.classList.add('homepage');
-			
+
 			// Set initial container height based on current hasReviews value
 			updateContainerHeight();
-			
+
 			const cleanup = setupSectionScrolling();
 
 			return () => {
@@ -105,10 +105,7 @@
 	<!-- Always load GoogleReviews component to determine visibility, but hide it when not needed -->
 	{#if !reviewsLoaded || !hasReviews}
 		<div style="display: none;">
-			<GoogleReviews
-				on:reviewsVisibility={handleReviewsVisibility}
-				hideIfEmpty={false}
-			/>
+			<GoogleReviews on:reviewsVisibility={handleReviewsVisibility} hideIfEmpty={false} />
 		</div>
 	{/if}
 
@@ -448,7 +445,6 @@
 			display: block !important;
 		}
 	}
-
 
 	:global(.full-page-section > *) {
 		width: 100%;

@@ -125,8 +125,15 @@
 									? 1
 									: 0.95}); transition-delay: {200 + i * 100}ms; will-change: transform, opacity;"
 							>
-								<span class="text-[#4dd36f] text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-0.5 sm:mt-1">✓</span>
-								<p class="text-sm sm:text-base md:text-lg lg:text-2xl xl:text-3xl text-white/80 leading-tight sm:leading-normal">{feature}</p>
+								<span
+									class="text-[#4dd36f] text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-0.5 sm:mt-1"
+									>✓</span
+								>
+								<p
+									class="text-sm sm:text-base md:text-lg lg:text-2xl xl:text-3xl text-white/80 leading-tight sm:leading-normal"
+								>
+									{feature}
+								</p>
 							</div>
 						{/each}
 					</div>
@@ -256,25 +263,49 @@
 
 							<!-- Card content -->
 							<div class="relative bg-[#0b090a] rounded-2xl p-4 sm:p-6 lg:p-8 text-center">
-								<h3 class="text-sm sm:text-base lg:text-lg font-semibold text-white/90 mb-2 sm:mb-3">Simple, Transparent Pricing:</h3>
-								<div class="text-base sm:text-lg lg:text-2xl font-bold mb-1 text-white/90">Starting at</div>
-								<div class="text-xl sm:text-2xl lg:text-4xl font-bold mb-1 sm:mb-2 gradient-text">$100 per computer</div>
-								<p class="text-sm sm:text-base lg:text-lg text-white/70 mb-2 sm:mb-4">(Most clients pay $400-600/month)</p>
-								
-								<div class="text-center bg-white/5 rounded-lg p-3 sm:p-4 lg:p-6 mb-2 sm:mb-4">
-									<p class="text-xs sm:text-sm lg:text-base text-white/90 mb-1 sm:mb-2 lg:mb-3 font-medium">✓ Minimum 4 computers</p>
-									<p class="text-xs sm:text-sm lg:text-base text-white/90 mb-1 sm:mb-2 lg:mb-3 font-medium">✓ No setup fees</p>
-									<p class="text-xs sm:text-sm lg:text-base text-white/90 mb-1 sm:mb-2 lg:mb-3 font-medium">✓ No contracts required</p>
-									<p class="text-xs sm:text-sm lg:text-base text-white/90 font-medium">✓ Cancel anytime</p>
+								<h3
+									class="text-sm sm:text-base lg:text-lg font-semibold text-white/90 mb-2 sm:mb-3"
+								>
+									Simple, Transparent Pricing:
+								</h3>
+								<div class="text-base sm:text-lg lg:text-2xl font-bold mb-1 text-white/90">
+									Starting at
 								</div>
-								
+								<div class="text-xl sm:text-2xl lg:text-4xl font-bold mb-1 sm:mb-2 gradient-text">
+									$100 per computer
+								</div>
+								<p class="text-sm sm:text-base lg:text-lg text-white/70 mb-2 sm:mb-4">
+									(Most clients pay $400-600/month)
+								</p>
+
+								<div class="text-center bg-white/5 rounded-lg p-3 sm:p-4 lg:p-6 mb-2 sm:mb-4">
+									<p
+										class="text-xs sm:text-sm lg:text-base text-white/90 mb-1 sm:mb-2 lg:mb-3 font-medium"
+									>
+										✓ Minimum 4 computers
+									</p>
+									<p
+										class="text-xs sm:text-sm lg:text-base text-white/90 mb-1 sm:mb-2 lg:mb-3 font-medium"
+									>
+										✓ No setup fees
+									</p>
+									<p
+										class="text-xs sm:text-sm lg:text-base text-white/90 mb-1 sm:mb-2 lg:mb-3 font-medium"
+									>
+										✓ No contracts required
+									</p>
+									<p class="text-xs sm:text-sm lg:text-base text-white/90 font-medium">
+										✓ Cancel anytime
+									</p>
+								</div>
+
 								<div class="border-t border-white/20 pt-4 mb-4">
 									<p class="text-sm font-semibold text-white/90 mb-2">Compare to:</p>
 									<p class="text-xs text-white/60 mb-1">• Emergency IT calls: $150-200/hour</p>
 									<p class="text-xs text-white/60 mb-1">• Full-time IT employee: $4,000+/month</p>
 									<p class="text-xs text-white/60">• Big MSPs: $2,000-5,000/month</p>
 								</div>
-								
+
 								<p class="text-sm text-[#4dd36f] font-semibold mb-4">
 									You'll save more in prevented downtime than you'll invest in support
 								</p>
@@ -309,7 +340,7 @@
 		.space-y-4:first-of-type {
 			min-height: 300px;
 		}
-		
+
 		.space-y-6:first-of-type {
 			min-height: 400px;
 		}
@@ -326,7 +357,7 @@
 			height: auto !important;
 			max-height: none !important;
 		}
-		
+
 		/* Ensure ALL containers flow naturally without height limits */
 		.relative.z-10.max-w-7xl,
 		.grid,
@@ -368,7 +399,7 @@
 	/* Match title sizes across all sections at intermediate resolutions */
 	@media (min-width: 961px) and (max-width: 1400px) and (min-height: 800px) and (max-height: 1100px) {
 		#what-you-get h2,
-		#what-you-get h2[class*="text-xl"] {
+		#what-you-get h2[class*='text-xl'] {
 			font-size: 3rem !important;
 			line-height: 1.2 !important;
 			font-weight: 700 !important;
@@ -445,7 +476,7 @@
 			margin-bottom: 0.75rem !important;
 		}
 
-		h2[class*="text-xl"] {
+		h2[class*='text-xl'] {
 			font-size: 2.75rem !important;
 			font-weight: 700 !important;
 		}
@@ -487,7 +518,7 @@
 			margin-bottom: 0.5rem !important;
 		}
 
-		h2[class*="text-xl"] {
+		h2[class*='text-xl'] {
 			font-size: 2.25rem !important;
 			font-weight: 700 !important;
 		}

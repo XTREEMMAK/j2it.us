@@ -91,7 +91,7 @@
 		{
 			number: '1',
 			title: 'Free Cost Analysis',
-			description: "Discover what IT problems are costing you and how much you can save",
+			description: 'Discover what IT problems are costing you and how much you can save',
 			color: 'from-[#4dd36f] to-[#3fb55f]',
 			delay: 0
 		},
@@ -311,7 +311,7 @@
 	/* Match title sizes across all sections at intermediate resolutions */
 	@media (min-width: 961px) and (max-width: 1400px) and (min-height: 800px) and (max-height: 1100px) {
 		#how-it-works h2,
-		#how-it-works h2[class*="text-3xl"] {
+		#how-it-works h2[class*='text-3xl'] {
 			font-size: 3rem !important;
 			line-height: 1.2 !important;
 			font-weight: 700 !important;
@@ -463,8 +463,8 @@
 		.text-center,
 		.process-cards-grid,
 		.process-card,
-		div[class*="min-h-["],
-		.text-center[class*="min-h-["] {
+		div[class*='min-h-['],
+		.text-center[class*='min-h-['] {
 			min-height: auto !important;
 			height: auto !important;
 			max-height: none !important;

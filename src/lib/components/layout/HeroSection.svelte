@@ -143,8 +143,8 @@
 					? 1
 					: 0.95}); transition-delay: 100ms; will-change: transform, opacity;"
 			>
-				Proactive IT support that keeps your business running smoothly. No more tech headaches, 
-				no more emergency calls, just reliable technology you can count on.
+				Proactive IT support that keeps your business running smoothly. No more tech headaches, no
+				more emergency calls, just reliable technology you can count on.
 			</p>
 
 			<!-- CTA Buttons -->
