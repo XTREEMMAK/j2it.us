@@ -6,13 +6,21 @@
 		isScrolling
 	} from '$lib/stores/sectionScroll.js';
 
-	const sectionNames = ['Home', 'About', 'Services', 'Process'];
+	export let hasReviews = false; // Receive from parent
+
+	// Dynamically set section names based on reviews availability
+	$: sectionNames = hasReviews
+		? ['Home', 'About', 'Services', 'Reviews', 'Process']
+		: ['Home', 'About', 'Services', 'Process'];
+
 	const DOT_SIZE = 12;
 	const GAP_SIZE = 16;
 	const ANIMATION_DURATION = 1200;
 
-	// Update the store with the actual section count
-	sectionsCount.set(sectionNames.length);
+	// Update the store with the actual section count when sectionNames changes
+	$: if (sectionNames) {
+		sectionsCount.set(sectionNames.length);
+	}
 
 	let currentlyActiveSection = $currentSection;
 	let isTransitioning = false;
@@ -28,6 +36,12 @@
 	function handleDotClick(targetSection) {
 		if (isTransitioning || targetSection === currentlyActiveSection) return;
 
+		// Map indicator section to actual page section
+		let actualSection = targetSection;
+		// When reviews are hidden, the actual page sections are:
+		// 0: Home, 1: About, 2: Services, 3: Process (no section 4)
+		// So no mapping needed - indicator matches page sections directly
+		
 		const fromPos = getDotPosition(currentlyActiveSection);
 		const toPos = getDotPosition(targetSection);
 
@@ -39,7 +53,7 @@
 		};
 
 		isTransitioning = true;
-		scrollToSection(targetSection);
+		scrollToSection(actualSection);
 
 		// Reset animation state
 		setTimeout(() => {
@@ -49,25 +63,37 @@
 		}, ANIMATION_DURATION);
 	}
 
+	// Map actual page section to indicator section
+	function getIndicatorSection(pageSection) {
+		// When reviews are hidden, page sections map directly to indicator sections
+		// When reviews are shown, they also map directly
+		// No mapping needed since we handle this in the page layout
+		return pageSection;
+	}
+
 	// Track section changes for non-click navigation (keyboard, wheel, etc.)
 	$: if ($currentSection !== currentlyActiveSection && !isTransitioning) {
-		currentlyActiveSection = $currentSection;
+		currentlyActiveSection = getIndicatorSection($currentSection);
 	}
 </script>
 
 <div class="section-indicator">
-	{#each sectionNames as sectionName, sectionIndex}
-		<div class="indicator-item">
-			<button
-				class="indicator-dot
-               {!isTransitioning && $currentSection === sectionIndex ? 'active' : ''}
-               {isTransitioning ? 'transitioning' : ''}"
-				on:click={() => handleDotClick(sectionIndex)}
-				aria-label="Go to {sectionName} section"
-			></button>
-			<span class="indicator-label">{sectionName}</span>
-		</div>
-	{/each}
+	{#if sectionNames}
+		{#each sectionNames as sectionName, sectionIndex}
+			<div class="indicator-item">
+				<button
+					class="indicator-dot
+	               {!isTransitioning && getIndicatorSection($currentSection) === sectionIndex
+						? 'active'
+						: ''}
+	               {isTransitioning ? 'transitioning' : ''}"
+					on:click={() => handleDotClick(sectionIndex)}
+					aria-label="Go to {sectionName} section"
+				></button>
+				<span class="indicator-label">{sectionName}</span>
+			</div>
+		{/each}
+	{/if}
 
 	<!-- Capsule animation overlay -->
 	{#if capsuleData && isTransitioning}

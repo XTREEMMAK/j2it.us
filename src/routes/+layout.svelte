@@ -6,6 +6,7 @@
 	import { onMount } from 'svelte';
 	import Navigation from '$lib/components/layout/Navigation.svelte';
 	import MyFooter from '$lib/components/layout/Footer.svelte';
+	import ScrollToTop from '$lib/components/layout/ScrollToTop.svelte';
 	import TawkMessenger from 'tawk-messenger-svelte';
 	import { PUBLIC_TAWK_PROPERTY_ID, PUBLIC_TAWK_WIDGET_ID } from '$env/static/public';
 	import { throttle } from '$lib/utils/throttle.js';
@@ -69,18 +70,18 @@
 		rel="stylesheet"
 	/>
 
-	<title>J²IT: IT and Web Solutions – Reliable Tech Support for Small Business</title>
+	<title>J²IT: IT and Web Solutions – Enterprise IT Protection at Small Business Prices</title>
 	<meta
 		name="description"
-		content="J²IT offers reliable IT support, web solutions, and consulting for small businesses, run by Jamaal Ephriam."
+		content="Stop overpaying for IT. J²IT delivers enterprise-level IT support for $400/month - less than one emergency IT call. Save thousands while getting better protection."
 	/>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="J²IT: IT and Web Solutions" />
+	<meta property="og:title" content="J²IT: Stop Paying $200/Hour for Emergency IT" />
 	<meta
 		property="og:description"
-		content="Reliable IT support and web solutions for small business by Jamaal Ephriam."
+		content="Get enterprise-level IT support for small business starting at $400/month. Save thousands compared to emergency IT calls and full-time employees."
 	/>
 	<meta property="og:image" content="{PUBLIC_CDN_URL}/images/Jamaal_Photo.webp" />
 	<meta property="og:url" content="https://www.j2it.us" />
@@ -88,10 +89,10 @@
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="J²IT: IT and Web Solutions" />
+	<meta name="twitter:title" content="J²IT: Stop Overpaying for IT Support" />
 	<meta
 		name="twitter:description"
-		content="Reliable IT support and tech consulting for small business by Jamaal Ephriam."
+		content="Enterprise IT protection scaled for small business. Save $4000+/month vs. full-time IT. Start at $400/month - less than one emergency call."
 	/>
 	<meta name="twitter:image" content="{PUBLIC_CDN_URL}/images/Jamaal_Photo.webp" />
 
@@ -118,6 +119,9 @@
 
 	<MyFooter copyyear={2025} />
 
+	<!-- Scroll to Top Button (Mobile Only) -->
+	<ScrollToTop />
+
 	<!-- Tawk.to Live Chat (Desktop Only) -->
 	{#if showTawk}
 		<TawkMessenger propertyId={PUBLIC_TAWK_PROPERTY_ID} widgetId={PUBLIC_TAWK_WIDGET_ID} />
@@ -128,11 +132,14 @@
 	/* View transition animations */
 	@supports (view-transition-name: none) {
 		::view-transition-old(root) {
-			animation: fade-out 0.2s ease-out;
+			animation: fade-out 0.25s ease-out;
+			mix-blend-mode: normal;
 		}
 
 		::view-transition-new(root) {
-			animation: fade-in 0.3s ease-out;
+			animation: fade-in 0.25s ease-out;
+			animation-delay: 0.15s;
+			animation-fill-mode: backwards;
 		}
 
 		@keyframes fade-out {

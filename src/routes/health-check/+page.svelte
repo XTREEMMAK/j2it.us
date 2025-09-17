@@ -11,10 +11,10 @@
 </script>
 
 <svelte:head>
-	<title>Free IT Health Check - J²it: IT and Web Solutions</title>
+	<title>Free IT Cost Analysis - Discover How Much Your IT Problems Cost</title>
 	<meta
 		name="description"
-		content="Get your free IT health check from J²it. Discover hidden risks, unnecessary costs, and simple fixes that could save your business time and money."
+		content="Free 15-minute assessment reveals exactly how much your IT problems are costing you. Most businesses discover they can save $2000-5000 per year with proper IT support."
 	/>
 </svelte:head>
 

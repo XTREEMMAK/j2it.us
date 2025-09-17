@@ -130,9 +130,8 @@
 					? 1
 					: 0.95}); will-change: transform, opacity;"
 			>
-				<span class="block">Affordable IT Support for</span>
-				<span class="block gradient-text">Small Businesses</span>
-				<span class="block text-white/90">— Simple, Worry-Free</span>
+				<span class="block">Reliable IT Support</span>
+				<span class="block gradient-text">That Actually Works</span>
 			</h1>
 
 			<!-- Subheadline -->
@@ -144,9 +143,8 @@
 					? 1
 					: 0.95}); transition-delay: 100ms; will-change: transform, opacity;"
 			>
-				For just <span class="text-[#4dd36f] font-semibold">$400/month</span>, I'll keep your
-				computers secure, backed up, and running so you can focus on running your business, not
-				fighting with tech.
+				Proactive IT support that keeps your business running smoothly. No more tech headaches, 
+				no more emergency calls, just reliable technology you can count on.
 			</p>
 
 			<!-- CTA Buttons -->
@@ -158,12 +156,12 @@
 			>
 				<a href="/health-check" class="btn-primary inline-flex items-center gap-3">
 					<Icon icon="heroicons:check-circle" class="w-7 h-7" />
-					Get Your Free IT Health Check
+					See How Affordable Professional IT Can Be
 				</a>
 				{#if $scheduleCallEnabled}
 					<a href="/contact#schedule" class="btn-secondary inline-flex items-center gap-3">
 						<Icon icon="heroicons:calendar-days" class="w-7 h-7" />
-						Schedule a Free 20-Min Call
+						Schedule Your Free IT Assessment
 					</a>
 				{/if}
 			</div>
@@ -177,15 +175,15 @@
 			>
 				<div class="flex items-center gap-2">
 					<Icon icon="heroicons:check-circle-solid" class="w-5 h-5 text-[#4dd36f]" />
-					<span>No long-term contracts</span>
+					<span>Enterprise-grade security</span>
 				</div>
 				<div class="flex items-center gap-2">
 					<Icon icon="heroicons:check-circle-solid" class="w-5 h-5 text-[#4dd36f]" />
-					<span>Flat monthly pricing</span>
+					<span>Proactive monitoring</span>
 				</div>
 				<div class="flex items-center gap-2">
 					<Icon icon="heroicons:check-circle-solid" class="w-5 h-5 text-[#4dd36f]" />
-					<span>Personal service</span>
+					<span>Direct expert support</span>
 				</div>
 			</div>
 		</div>
@@ -207,23 +205,27 @@
 	}
 
 	/* Mobile adjustments */
-	@media (max-width: 769px) {
-		/* Remove padding from section to preserve background */
-		section {
-			padding: 0 !important;
-			overflow: visible !important; /* Allow content to expand naturally */
+	@media (max-width: 768px) {
+		/* Override universal padding rule with higher specificity */
+		.full-page-section section,
+		div.full-page-section section,
+		section.relative.h-full.flex.items-center {
+			padding: 0px !important; /* No padding on section */
+			height: 100vh !important; /* Restore full viewport height */
 			min-height: 100vh !important; /* Ensure minimum viewport height */
+			overflow: visible !important; /* Allow content to expand naturally */
 		}
 
 		/* Add padding to inner container */
 		section > div {
-			padding: 30px !important;
+			padding: 60px 0px 30px 0px !important; /* Move top padding here for nav clearance */
 			overflow: visible !important; /* Allow content to expand naturally */
 		}
 
 		/* Reserve space for mobile animations */
 		.relative.z-10.max-w-6xl {
-			min-height: 70vh !important; /* Reserve space on mobile only */
+			min-height: auto !important; /* Remove height constraints */
+			padding: 0 20px !important; /* Only minimal side padding for text content */
 		}
 
 		.hero-title {

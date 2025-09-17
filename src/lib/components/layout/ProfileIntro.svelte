@@ -84,7 +84,7 @@
 						in:animations.text.in={animations.text.inProps}
 						out:animations.text.out={animations.text.outProps}
 					>
-						Meet Your IT Partner
+						Enterprise IT Protection at Small Business Prices
 					</h2>
 
 					<h3
@@ -100,8 +100,8 @@
 						out:animations.text.out={animations.text.outProps}
 					>
 						<p class="text-xl sm:text-2xl text-white/70 mb-4">
-							I provide affordable IT support for small businesses that don't have a full-time IT
-							person. For a flat monthly fee, I keep your computers secure, patched, and backed up.
+							I provide enterprise-level IT protection scaled and priced for small businesses. No surprises, 
+							no hourly bills, just predictable monthly pricing that makes sense for your budget.
 						</p>
 
 						<p class="text-xl sm:text-2xl text-white/70 mb-6">
@@ -126,8 +126,8 @@
 									/>
 								</svg>
 								<div>
-									<p class="font-semibold text-white">Direct Support</p>
-									<p class="text-sm text-white/60">Work directly with me, not a call center</p>
+									<p class="font-semibold text-white">Save $4000+/month</p>
+									<p class="text-sm text-white/60">vs. hiring a full-time IT person</p>
 								</div>
 							</div>
 
@@ -146,8 +146,8 @@
 									/>
 								</svg>
 								<div>
-									<p class="font-semibold text-white">Plain English</p>
-									<p class="text-sm text-white/60">No confusing technical jargon</p>
+									<p class="font-semibold text-white">Stop Emergency Bills</p>
+									<p class="text-sm text-white/60">No more $200/hour crisis calls</p>
 								</div>
 							</div>
 
@@ -166,8 +166,8 @@
 									/>
 								</svg>
 								<div>
-									<p class="font-semibold text-white">Fixed Pricing</p>
-									<p class="text-sm text-white/60">No surprise bills or hidden fees</p>
+									<p class="font-semibold text-white">Predictable Budget</p>
+									<p class="text-sm text-white/60">Fixed monthly investment</p>
 								</div>
 							</div>
 
@@ -186,8 +186,8 @@
 									/>
 								</svg>
 								<div>
-									<p class="font-semibold text-white">Small Business Focus</p>
-									<p class="text-sm text-white/60">Solutions that fit your size and budget</p>
+									<p class="font-semibold text-white">ROI in First Month</p>
+									<p class="text-sm text-white/60">Pays for itself by preventing issues</p>
 								</div>
 							</div>
 						</div>
@@ -214,19 +214,229 @@
 		background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));
 	}
 
-	/* Mobile optimizations */
-	@media (max-width: 769px) {
-		/* Remove padding from section to preserve background */
+	/* Intermediate desktop resolution fixes */
+	@media (min-width: 961px) and (max-width: 1400px) and (min-height: 800px) and (max-height: 1100px) {
 		section {
-			padding: 0 !important;
+			padding: 40px 20px !important;
+			display: flex;
+			align-items: flex-start;
+			justify-content: center;
+			min-height: auto !important;
+		}
+
+		.relative.z-10.max-w-5xl {
+			margin-top: 0;
+			padding: 0;
+		}
+
+		.flex.flex-col.lg\\:flex-row {
+			gap: 2rem !important;
+			align-items: center;
+		}
+
+		/* Smaller profile container - maintain aspect ratio */
+		.relative.w-80.h-80 {
+			width: 240px !important;
+			height: 240px !important;
+		}
+
+		/* Scale all inner elements proportionally */
+		.relative.w-80.h-80 .absolute.inset-0 {
+			width: 240px !important;
+			height: 240px !important;
+		}
+
+		.relative.w-80.h-80 .absolute.-inset-5 {
+			width: 260px !important;
+			height: 260px !important;
+			margin: -10px !important;
+		}
+
+		/* Inner content container */
+		.relative.w-80.h-80 div[class*="inset-"] {
+			padding: 6px !important;
+		}
+
+		/* Scale inner image to fit properly */
+		.relative.w-80.h-80 img,
+		.relative.w-80.h-80 .w-64.h-64 {
+			width: 180px !important;
+			height: 180px !important;
+		}
+
+		/* Text scaling - make main title larger */
+		h2 {
+			font-size: 3rem !important;
+			line-height: 1.2 !important;
+			margin-bottom: 1rem !important;
+			font-weight: 700 !important;
+		}
+
+		h3 {
+			font-size: 1.5rem !important;
+			margin-bottom: 1rem !important;
+		}
+
+		p {
+			font-size: 1.1rem !important;
+			line-height: 1.4 !important;
+			margin-bottom: 1rem !important;
+		}
+
+		/* Benefit grid adjustments */
+		.grid {
+			gap: 1rem !important;
+			margin-top: 1.5rem !important;
+		}
+
+		.font-semibold {
+			font-size: 1rem !important;
+		}
+
+		.text-sm {
+			font-size: 0.875rem !important;
+		}
+	}
+
+	/* Desktop with shorter heights */
+	@media (min-width: 770px) and (max-height: 950px) {
+		section {
+			padding: 20px !important;
+		}
+
+		.relative.w-80.h-80 {
+			width: 200px !important;
+			height: 200px !important;
+		}
+
+		.relative.w-80.h-80 .absolute.inset-0 {
+			width: 200px !important;
+			height: 200px !important;
+		}
+
+		.relative.w-80.h-80 .absolute.-inset-5 {
+			width: 220px !important;
+			height: 220px !important;
+			margin: -10px !important;
+		}
+
+		.relative.w-80.h-80 div[class*="inset-"] {
+			padding: 5px !important;
+		}
+
+		.relative.w-80.h-80 img,
+		.relative.w-80.h-80 .w-64.h-64 {
+			width: 150px !important;
+			height: 150px !important;
+		}
+
+		h2 {
+			font-size: 1.75rem !important;
+			margin-bottom: 0.75rem !important;
+		}
+
+		h3 {
+			font-size: 1.25rem !important;
+			margin-bottom: 0.75rem !important;
+		}
+
+		p {
+			font-size: 1rem !important;
+			margin-bottom: 0.75rem !important;
+		}
+
+		.grid {
+			gap: 0.75rem !important;
+			margin-top: 1rem !important;
+		}
+	}
+
+	/* Very short heights */
+	@media (min-width: 770px) and (max-height: 800px) {
+		section {
+			padding: 10px !important;
+		}
+
+		.relative.w-80.h-80 {
+			width: 160px !important;
+			height: 160px !important;
+		}
+
+		.relative.w-80.h-80 .absolute.inset-0 {
+			width: 160px !important;
+			height: 160px !important;
+		}
+
+		.relative.w-80.h-80 .absolute.-inset-5 {
+			width: 180px !important;
+			height: 180px !important;
+			margin: -10px !important;
+		}
+
+		.relative.w-80.h-80 div[class*="inset-"] {
+			padding: 4px !important;
+		}
+
+		.relative.w-80.h-80 img,
+		.relative.w-80.h-80 .w-64.h-64 {
+			width: 120px !important;
+			height: 120px !important;
+		}
+
+		.flex.flex-col.lg\\:flex-row {
+			gap: 1rem !important;
+		}
+
+		h2 {
+			font-size: 1.5rem !important;
+			margin-bottom: 0.5rem !important;
+		}
+
+		h3 {
+			font-size: 1.125rem !important;
+			margin-bottom: 0.5rem !important;
+		}
+
+		p {
+			font-size: 0.875rem !important;
+			margin-bottom: 0.5rem !important;
+		}
+
+		.grid {
+			gap: 0.5rem !important;
+			margin-top: 0.75rem !important;
+		}
+
+		.font-semibold {
+			font-size: 0.875rem !important;
+		}
+
+		.text-sm {
+			font-size: 0.75rem !important;
+		}
+	}
+
+	/* Mobile optimizations */
+	@media (max-width: 768px) {
+		/* Override universal padding rule with higher specificity */
+		.full-page-section section,
+		div.full-page-section section,
+		section.relative.h-full.flex.items-center {
+			padding: 0px !important; /* No padding on section */
+			height: auto !important; /* Auto height to fit content */
+			min-height: auto !important; /* Remove viewport height constraints */
 			overflow: visible !important; /* Allow content to expand naturally */
-			min-height: 100vh !important; /* Ensure minimum viewport height */
 		}
 
 		/* Add padding to inner container */
 		section > div {
-			padding: 30px !important;
+			padding: 0px !important; /* Remove since we're applying padding to content container */
 			overflow: visible !important; /* Allow content to expand naturally */
+		}
+
+		/* Content container padding - use your working approach */
+		.relative.z-10.max-w-5xl {
+			padding: 50px 20px 50px 20px !important; /* Your working solution */
 		}
 
 		/* Prevent profile image overflow */
@@ -243,7 +453,7 @@
 		}
 
 		/* Stack benefit items vertically and center them */
-		.grid.sm\\:grid-cols-2 {
+		.grid {
 			grid-template-columns: 1fr !important;
 			gap: 1.5rem !important;
 			max-width: 100% !important;

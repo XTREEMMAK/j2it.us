@@ -53,6 +53,8 @@ jobs:
           export N8N_HEALTH_CHECK_WEBHOOK_URL="${{ secrets.N8N_HEALTH_CHECK_WEBHOOK_URL }}"
           export PUBLIC_TAWK_PROPERTY_ID="${{ secrets.PUBLIC_TAWK_PROPERTY_ID }}"
           export PUBLIC_TAWK_WIDGET_ID="${{ secrets.PUBLIC_TAWK_WIDGET_ID }}"
+          export GOOGLE_PLACES_API_KEY="${{ secrets.GOOGLE_PLACES_API_KEY }}"
+          export GOOGLE_BUSINESS_PLACE_ID="${{ secrets.GOOGLE_BUSINESS_PLACE_ID }}"
 
           # Use perl for safer replacement that handles special characters
           perl -pi -e 's/\{\{PUBLIC_CDN_URL\}\}/$ENV{PUBLIC_CDN_URL}/g' .env
@@ -61,6 +63,8 @@ jobs:
           perl -pi -e 's/\{\{N8N_HEALTH_CHECK_WEBHOOK_URL\}\}/$ENV{N8N_HEALTH_CHECK_WEBHOOK_URL}/g' .env
           perl -pi -e 's/\{\{PUBLIC_TAWK_PROPERTY_ID\}\}/$ENV{PUBLIC_TAWK_PROPERTY_ID}/g' .env
           perl -pi -e 's/\{\{PUBLIC_TAWK_WIDGET_ID\}\}/$ENV{PUBLIC_TAWK_WIDGET_ID}/g' .env
+          perl -pi -e 's/\{\{GOOGLE_PLACES_API_KEY\}\}/$ENV{GOOGLE_PLACES_API_KEY}/g' .env
+          perl -pi -e 's/\{\{GOOGLE_BUSINESS_PLACE_ID\}\}/$ENV{GOOGLE_BUSINESS_PLACE_ID}/g' .env
 
           # Replace hardcoded values (use | as delimiter and quote values with spaces)
           sed -i 's|{{PUBLIC_BUSINESS_NAME}}|"J² IT Solutions"|g' .env

@@ -90,22 +90,22 @@
 	const processSteps = [
 		{
 			number: '1',
-			title: 'Free Assessment',
-			description: "I'll check your current setup and identify your needs and risks",
+			title: 'Free Cost Analysis',
+			description: "Discover what IT problems are costing you and how much you can save",
 			color: 'from-[#4dd36f] to-[#3fb55f]',
 			delay: 0
 		},
 		{
 			number: '2',
-			title: 'Simple Setup',
-			description: 'Quick installation of monitoring tools',
+			title: 'Quick Setup',
+			description: 'Start saving money immediately with proactive monitoring',
 			color: 'from-[#4dd3ff] to-[#4158D0]',
 			delay: 200
 		},
 		{
 			number: '3',
-			title: 'Ongoing Peace of Mind',
-			description: 'Flat monthly rate, reliable support',
+			title: 'See ROI Fast',
+			description: 'Most clients save money in the first month alone',
 			color: 'from-[#ff4d8f] to-[#C850C0]',
 			delay: 400
 		}
@@ -145,7 +145,7 @@
 					? 0
 					: 30}px); transition-delay: 100ms;"
 			>
-				Simple, transparent IT support in three easy steps
+				Stop overpaying for IT - here's how we make it affordable
 			</p>
 		</div>
 
@@ -155,7 +155,7 @@
 				class="text-2xl sm:text-3xl font-bold mb-6 transition-all duration-500"
 				style="opacity: {ctaVisible ? 1 : 0}; transform: translateY({ctaVisible ? 0 : 30}px);"
 			>
-				Stop Fighting with<br />Technology
+				Your Current IT Approach<br />Is Costing You Money
 			</h3>
 			<div
 				class="flex flex-col sm:flex-row gap-4 justify-center transition-all duration-500"
@@ -165,12 +165,12 @@
 			>
 				<a href="/health-check" class="btn-primary inline-flex items-center gap-3">
 					<Icon icon="heroicons:check-circle" class="w-7 h-7" />
-					Get Your Free IT Health Check
+					Find Out How Much You Can Save
 				</a>
 				{#if $scheduleCallEnabled}
 					<a href="/contact#schedule" class="btn-secondary inline-flex items-center gap-3">
 						<Icon icon="heroicons:calendar-days" class="w-7 h-7" />
-						Or schedule a quick call
+						Get your custom cost analysis
 					</a>
 				{/if}
 			</div>
@@ -237,7 +237,7 @@
 					? 0
 					: 30}px);"
 			>
-				Ready to stop worrying about IT and focus on your business?
+				Ready for IT support that just works?
 			</p>
 			<br />
 			<a
@@ -308,19 +308,148 @@
 		background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));
 	}
 
-	/* Mobile optimizations */
-	@media (max-width: 769px) {
-		/* Remove padding from section to preserve background */
+	/* Match title sizes across all sections at intermediate resolutions */
+	@media (min-width: 961px) and (max-width: 1400px) and (min-height: 800px) and (max-height: 1100px) {
+		#how-it-works h2,
+		#how-it-works h2[class*="text-3xl"] {
+			font-size: 3rem !important;
+			line-height: 1.2 !important;
+			font-weight: 700 !important;
+			margin-bottom: 1rem !important;
+		}
+	}
+
+	/* Mobile optimizations with scrolling for edge cases - high specificity */
+	/* Intermediate desktop resolution fixes */
+	@media (min-width: 961px) and (max-width: 1400px) and (min-height: 800px) and (max-height: 1100px) {
 		section {
-			padding: 0 !important;
-			overflow: visible !important; /* Allow content to expand naturally */
-			min-height: 100vh !important; /* Ensure minimum viewport height */
+			padding: 40px 20px !important;
+			display: flex;
+			align-items: flex-start;
+			justify-content: center;
+			min-height: auto !important;
 		}
 
-		/* Add padding to inner container */
-		section > div {
+		.relative.z-10.max-w-7xl {
+			margin-top: 0;
+			padding: 0;
+		}
+
+		/* Title scaling - match other section titles */
+		h2 {
+			font-size: 3rem !important;
+			line-height: 1.2 !important;
+			margin-bottom: 1rem !important;
+			font-weight: 700 !important;
+		}
+
+		h3 {
+			font-size: 1.75rem !important;
+			margin-bottom: 1rem !important;
+		}
+
+		/* Step cards grid */
+		.grid.lg\\:grid-cols-3 {
+			grid-template-columns: repeat(3, 1fr) !important;
+			gap: 1.5rem !important;
+		}
+
+		/* CTA section */
+		.text-2xl {
+			font-size: 1.5rem !important;
+		}
+
+		.text-xl {
+			font-size: 1.25rem !important;
+		}
+	}
+
+	/* Desktop with shorter heights */
+	@media (min-width: 770px) and (max-height: 950px) {
+		section {
+			padding: 20px !important;
+		}
+
+		h2 {
+			font-size: 1.75rem !important;
+			margin-bottom: 0.75rem !important;
+		}
+
+		h3 {
+			font-size: 1.5rem !important;
+			margin-bottom: 0.75rem !important;
+		}
+
+		.grid.lg\\:grid-cols-3 {
+			gap: 1rem !important;
+		}
+
+		.text-2xl {
+			font-size: 1.25rem !important;
+		}
+
+		.text-xl {
+			font-size: 1.125rem !important;
+		}
+	}
+
+	/* Very short heights */
+	@media (min-width: 770px) and (max-height: 800px) {
+		section {
+			padding: 10px !important;
+		}
+
+		h2 {
+			font-size: 1.5rem !important;
+			margin-bottom: 0.5rem !important;
+		}
+
+		h3 {
+			font-size: 1.25rem !important;
+			margin-bottom: 0.5rem !important;
+		}
+
+		.grid.lg\\:grid-cols-3 {
+			grid-template-columns: repeat(2, 1fr) !important;
+			gap: 0.75rem !important;
+		}
+
+		.text-2xl {
+			font-size: 1.125rem !important;
+		}
+
+		.text-xl {
+			font-size: 1rem !important;
+		}
+	}
+
+	@media (max-width: 768px) {
+		/* Remove padding from section to preserve background and allow natural flow */
+		#how-it-works.relative.h-full {
+			height: auto !important; /* Remove h-full constraint on mobile */
+			padding: 0 !important;
+			overflow: visible !important; /* Allow content to expand naturally */
+			min-height: auto !important; /* Remove viewport height constraints */
+			/* Fix vertical centering that crops content on short viewports */
+			display: block !important; /* Override flex layout */
+			align-items: flex-start !important; /* Prevent vertical centering */
+		}
+
+		/* Add padding to inner container and remove all height constraints */
+		#how-it-works > div {
 			padding: 5rem 1.5rem 2rem 1.5rem !important;
 			overflow: visible !important; /* Allow content to expand naturally */
+			height: auto !important;
+			min-height: auto !important;
+		}
+
+		/* Remove height constraints from all containers */
+		#how-it-works section > div > div,
+		#how-it-works .relative.z-10,
+		#how-it-works .max-w-7xl {
+			height: auto !important;
+			min-height: auto !important;
+			max-height: none !important;
 		}
 
 		/* Prevent horizontal overflow on mobile only */
@@ -328,6 +457,17 @@
 		.max-w-7xl {
 			overflow-x: hidden !important; /* Prevent horizontal scroll only */
 			max-width: 100% !important;
+		}
+
+		/* Remove ALL height constraints from content areas including min-h-[] classes */
+		.text-center,
+		.process-cards-grid,
+		.process-card,
+		div[class*="min-h-["],
+		.text-center[class*="min-h-["] {
+			min-height: auto !important;
+			height: auto !important;
+			max-height: none !important;
 		}
 
 		/* Adjust grid for mobile */

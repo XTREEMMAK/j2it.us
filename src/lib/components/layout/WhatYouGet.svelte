@@ -64,9 +64,11 @@
 	};
 
 	const features = [
-		'Small offices, retail shops, or professional services with 3-10 computers',
-		'Businesses without a dedicated IT person on staff',
-		'Companies tired of emergency IT bills and unpredictable costs'
+		'Perfect for businesses with 4-10 computers who need enterprise protection',
+		'Save thousands compared to hiring a full-time IT person ($50K+ salary)',
+		'Stop paying $150-200/hour for emergency IT support calls',
+		'No more lost productivity from computer problems (worth $1000s/month)',
+		'Predictable IT budget - no surprise bills or hidden fees'
 	];
 
 	const serviceCards = [
@@ -93,7 +95,7 @@
 
 <section
 	id="what-you-get"
-	class="relative h-full flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8"
+	class="relative h-full flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
 >
 	<div class="absolute inset-0 bg-gradient-to-b from-[#1a1a2e] to-[#120f1a]"></div>
 
@@ -103,17 +105,17 @@
 				<!-- Left side - Features list -->
 				<div>
 					<h2
-						class="text-3xl sm:text-4xl font-bold mb-8 transition-all duration-500"
+						class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 md:mb-6 lg:mb-8 transition-all duration-500"
 						style="opacity: {textVisible
 							? 1
 							: 0}; transform: translate3d(0, 0, 0) scale({textVisible
 							? 1
 							: 0.95}); will-change: transform, opacity;"
 					>
-						What You Get
+						The Smart Investment That Pays for Itself
 					</h2>
 
-					<div class="space-y-4" style="min-height: {textVisible ? 'auto' : '300px'};">
+					<div class="space-y-2 sm:space-y-3 md:space-y-4">
 						{#each features as feature, i}
 							<div
 								class="flex items-start gap-3 transition-all duration-500"
@@ -123,8 +125,8 @@
 									? 1
 									: 0.95}); transition-delay: {200 + i * 100}ms; will-change: transform, opacity;"
 							>
-								<span class="text-[#4dd36f] text-3xl font-bold mt-1">✓</span>
-								<p class="text-3xl text-white/80">{feature}</p>
+								<span class="text-[#4dd36f] text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-0.5 sm:mt-1">✓</span>
+								<p class="text-sm sm:text-base md:text-lg lg:text-2xl xl:text-3xl text-white/80 leading-tight sm:leading-normal">{feature}</p>
 							</div>
 						{/each}
 					</div>
@@ -138,7 +140,7 @@
 						style="transform: translate(40px, 80px);"
 					></div>
 
-					<!-- Cards container with spacing -->
+					<!-- Cards container with spacing and min-height for desktop -->
 					<div class="space-y-6">
 						<!-- Service cards grid -->
 						<div class="feature-cards-grid grid grid-cols-1 sm:grid-cols-3 gap-5">
@@ -237,7 +239,7 @@
 							{/each}
 						</div>
 
-						<!-- Pricing card -->
+						<!-- Pricing card with min-height for desktop -->
 						<div
 							class="pricing-card relative z-10"
 							in:animations.pricing.in={{ ...animations.pricing.inProps, delay: 1200 }}
@@ -253,15 +255,28 @@
 							></div>
 
 							<!-- Card content -->
-							<div class="relative bg-[#0b090a] rounded-2xl p-8 text-center">
-								<h3 class="text-lg font-semibold text-white/90 mb-3">Flat Rate:</h3>
-								<div class="text-4xl font-bold mb-2 gradient-text">$400/month</div>
-								<p class="text-lg text-white/70 mb-2">for up to 4 computers</p>
-								<p class="text-sm text-white/80 mb-4">Or: $100 per computer/month</p>
-								<p class="text-sm text-white/80 mb-4">No hidden fees</p>
-								<p class="text-xs text-white/50 mb-6 leading-relaxed">
-									Get enterprise-level IT support without the enterprise price tag.<br />
-									Simple, transparent pricing that fits your budget.
+							<div class="relative bg-[#0b090a] rounded-2xl p-4 sm:p-6 lg:p-8 text-center">
+								<h3 class="text-sm sm:text-base lg:text-lg font-semibold text-white/90 mb-2 sm:mb-3">Simple, Transparent Pricing:</h3>
+								<div class="text-base sm:text-lg lg:text-2xl font-bold mb-1 text-white/90">Starting at</div>
+								<div class="text-xl sm:text-2xl lg:text-4xl font-bold mb-1 sm:mb-2 gradient-text">$100 per computer</div>
+								<p class="text-sm sm:text-base lg:text-lg text-white/70 mb-2 sm:mb-4">(Most clients pay $400-600/month)</p>
+								
+								<div class="text-center bg-white/5 rounded-lg p-3 sm:p-4 lg:p-6 mb-2 sm:mb-4">
+									<p class="text-xs sm:text-sm lg:text-base text-white/90 mb-1 sm:mb-2 lg:mb-3 font-medium">✓ Minimum 4 computers</p>
+									<p class="text-xs sm:text-sm lg:text-base text-white/90 mb-1 sm:mb-2 lg:mb-3 font-medium">✓ No setup fees</p>
+									<p class="text-xs sm:text-sm lg:text-base text-white/90 mb-1 sm:mb-2 lg:mb-3 font-medium">✓ No contracts required</p>
+									<p class="text-xs sm:text-sm lg:text-base text-white/90 font-medium">✓ Cancel anytime</p>
+								</div>
+								
+								<div class="border-t border-white/20 pt-4 mb-4">
+									<p class="text-sm font-semibold text-white/90 mb-2">Compare to:</p>
+									<p class="text-xs text-white/60 mb-1">• Emergency IT calls: $150-200/hour</p>
+									<p class="text-xs text-white/60 mb-1">• Full-time IT employee: $4,000+/month</p>
+									<p class="text-xs text-white/60">• Big MSPs: $2,000-5,000/month</p>
+								</div>
+								
+								<p class="text-sm text-[#4dd36f] font-semibold mb-4">
+									You'll save more in prevented downtime than you'll invest in support
 								</p>
 								{#if $scheduleCallEnabled}
 									<a
@@ -283,19 +298,42 @@
 <style>
 	.feature-card {
 		transition: transform 0.3s ease;
-		/* Ensure cards maintain layout space during animation */
-		min-height: 120px; /* Reserve minimum space */
 	}
 
 	.feature-card:hover {
 		transform: translateY(-5px) scale(1.02);
 	}
 
+	/* Desktop min-heights for layout stability */
+	@media (min-width: 769px) {
+		.space-y-4:first-of-type {
+			min-height: 300px;
+		}
+		
+		.space-y-6:first-of-type {
+			min-height: 400px;
+		}
+	}
+
 	/* Prevent layout shifts during animations - mobile only */
-	@media (max-width: 769px) {
-		.feature-cards-grid {
-			/* Reserve space for cards during animation on mobile only */
-			min-height: 400px; /* Adjust based on content */
+	@media (max-width: 768px) {
+		/* Remove ALL height constraints for mobile */
+		.space-y-4,
+		.space-y-6,
+		.feature-cards-grid,
+		.pricing-card {
+			min-height: auto !important;
+			height: auto !important;
+			max-height: none !important;
+		}
+		
+		/* Ensure ALL containers flow naturally without height limits */
+		.relative.z-10.max-w-7xl,
+		.grid,
+		.text-center {
+			min-height: auto !important;
+			height: auto !important;
+			max-height: none !important;
 		}
 	}
 
@@ -327,63 +365,234 @@
 		background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));
 	}
 
-	/* Mobile optimizations */
-	@media (max-width: 769px) {
-		/* Remove padding from section to preserve background */
-		section {
-			padding: 0 !important;
-			overflow: visible !important; /* Allow content to expand naturally */
-			height: auto !important;
-			min-height: 100vh !important; /* Ensure minimum viewport height */
+	/* Match title sizes across all sections at intermediate resolutions */
+	@media (min-width: 961px) and (max-width: 1400px) and (min-height: 800px) and (max-height: 1100px) {
+		#what-you-get h2,
+		#what-you-get h2[class*="text-xl"] {
+			font-size: 3rem !important;
+			line-height: 1.2 !important;
+			font-weight: 700 !important;
+			margin-bottom: 1rem !important;
 		}
+	}
 
-		/* Add padding to inner container */
-		section > div {
-			padding: 30px !important;
-			overflow: visible !important; /* Allow content to expand naturally */
-			height: auto !important;
+	/* Intermediate desktop resolution fixes - expanded range */
+	@media (min-width: 960px) and (max-width: 1440px) and (min-height: 900px) and (max-height: 1200px) {
+		section {
+			padding: 40px 20px !important;
+			display: flex;
+			align-items: flex-start;
+			justify-content: center;
 			min-height: auto !important;
 		}
 
-		/* Prevent overflow and ensure proper spacing */
+		.relative.z-10.max-w-7xl {
+			margin-top: 0;
+			padding: 0;
+		}
+
+		/* Grid adjustments */
 		.grid.lg\\:grid-cols-2 {
+			gap: 2rem !important;
+			grid-template-columns: 1fr 1fr !important;
+		}
+
+		.grid.sm\\:grid-cols-3 {
+			grid-template-columns: repeat(3, 1fr) !important;
+			gap: 1rem !important;
+		}
+
+		/* Feature list text */
+		.space-y-6 > div {
+			margin-bottom: 0.75rem !important;
+		}
+
+		/* Service cards scaling */
+		.service-card {
+			padding: 1.5rem !important;
+		}
+
+		/* Pricing section adjustments */
+		.text-4xl {
+			font-size: 2rem !important;
+		}
+
+		.text-2xl {
+			font-size: 1.5rem !important;
+		}
+
+		.text-xl {
+			font-size: 1.25rem !important;
+		}
+	}
+
+	/* Desktop with shorter heights */
+	@media (min-width: 770px) and (max-height: 950px) {
+		section {
+			padding: 20px !important;
+		}
+
+		.grid.lg\\:grid-cols-2 {
+			gap: 1.5rem !important;
+		}
+
+		.grid.sm\\:grid-cols-3 {
+			gap: 0.75rem !important;
+		}
+
+		h2 {
+			font-size: 2rem !important;
+			margin-bottom: 0.75rem !important;
+		}
+
+		h2[class*="text-xl"] {
+			font-size: 2.75rem !important;
+			font-weight: 700 !important;
+		}
+
+		.space-y-6 > div {
+			margin-bottom: 0.5rem !important;
+		}
+
+		.text-4xl {
+			font-size: 1.75rem !important;
+		}
+
+		.text-2xl {
+			font-size: 1.25rem !important;
+		}
+
+		.text-xl {
+			font-size: 1.125rem !important;
+		}
+	}
+
+	/* Very short heights */
+	@media (min-width: 770px) and (max-height: 800px) {
+		section {
+			padding: 10px !important;
+		}
+
+		.grid.lg\\:grid-cols-2 {
+			gap: 1rem !important;
+		}
+
+		.grid.sm\\:grid-cols-3 {
+			grid-template-columns: repeat(2, 1fr) !important;
+			gap: 0.5rem !important;
+		}
+
+		h2 {
+			font-size: 1.75rem !important;
+			margin-bottom: 0.5rem !important;
+		}
+
+		h2[class*="text-xl"] {
+			font-size: 2.25rem !important;
+			font-weight: 700 !important;
+		}
+
+		.space-y-6 > div {
+			margin-bottom: 0.25rem !important;
+		}
+
+		.text-4xl {
+			font-size: 1.5rem !important;
+		}
+
+		.text-2xl {
+			font-size: 1.125rem !important;
+		}
+
+		.text-xl {
+			font-size: 1rem !important;
+		}
+
+		.service-card {
+			padding: 1rem !important;
+		}
+	}
+
+	/* Mobile responsive layout only */
+	@media (max-width: 768px) {
+		#what-you-get.relative.h-full {
+			height: auto !important;
+			padding: 0 !important;
+			overflow: visible !important;
+			min-height: auto !important;
+			display: block !important;
+			align-items: flex-start !important;
+		}
+
+		/* Much higher specificity targeting - override everything */
+		section#what-you-get.relative.h-full > div.relative.z-10.max-w-7xl,
+		#what-you-get > div.relative.z-10.max-w-7xl,
+		#what-you-get > div {
+			padding: 60px 50px 60px 50px !important;
+			overflow: visible !important;
+			height: auto !important;
+			min-height: auto !important;
+			max-width: 100% !important;
+			margin: 0 auto !important;
+		}
+
+		/* Grid container specific targeting */
+		#what-you-get .grid.lg\\:grid-cols-2,
+		#what-you-get div.grid.lg\\:grid-cols-2.gap-12.items-start {
 			grid-template-columns: 1fr !important;
 			gap: 2rem !important;
 			max-width: 100% !important;
 			overflow-x: hidden !important;
 			overflow-y: visible !important;
+			width: 100% !important;
+			padding: 0 20px !important; /* Additional inner padding for grid */
 		}
 
-		/* Ensure service cards stack properly on mobile */
-		.grid.md\\:grid-cols-3,
-		.grid.sm\\:grid-cols-3 {
+		#what-you-get .grid.md\\:grid-cols-3,
+		#what-you-get .grid.sm\\:grid-cols-3 {
 			grid-template-columns: 1fr !important;
-			gap: 1.5rem !important;
+			gap: 1rem !important;
 			max-width: 100% !important;
-			overflow: visible !important; /* Allow content to flow naturally */
+			overflow: visible !important;
+			width: 100% !important;
 		}
 
-		/* Prevent content from being too wide */
-		.max-w-7xl {
+		/* Fix feature list text overflow */
+		#what-you-get .space-y-2 p,
+		#what-you-get .space-y-3 p,
+		#what-you-get .space-y-4 p {
+			word-wrap: break-word !important;
+			overflow-wrap: break-word !important;
+			hyphens: auto !important;
+		}
+
+		#what-you-get section > div > div,
+		#what-you-get .relative.z-10,
+		#what-you-get .max-w-7xl {
+			height: auto !important;
+			min-height: auto !important;
+			max-height: none !important;
+		}
+
+		#what-you-get .max-w-7xl {
 			max-width: 100% !important;
 			padding: 0 !important;
-			overflow-x: hidden !important; /* Prevent horizontal scroll only */
-			min-height: 80vh !important; /* Reserve space for mobile animations */
+			overflow-x: hidden !important;
 		}
 
-		/* Better mobile text spacing */
-		.text-3xl.sm\\:text-4xl {
-			font-size: 2.5rem !important;
-			line-height: 1.2 !important;
+		/* Target the direct child containers within the grid */
+		#what-you-get .grid > div:first-child,
+		#what-you-get .grid > div:last-child {
+			padding: 0 15px !important;
+			margin: 0 !important;
 		}
 
-		/* Fix cards container spacing */
 		.space-y-6 {
-			overflow: visible !important; /* Allow content to flow naturally */
+			overflow: visible !important;
 		}
 
 		.feature-cards-grid {
-			overflow: visible !important; /* Allow content to flow naturally */
+			overflow: visible !important;
 			min-height: auto !important;
 		}
 	}

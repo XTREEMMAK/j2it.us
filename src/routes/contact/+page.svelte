@@ -20,10 +20,10 @@
 </script>
 
 <svelte:head>
-	<title>Contact J2 IT Solutions - Get Your Free IT Consultation</title>
+	<title>Contact J2 IT Solutions - Save Money on IT Support</title>
 	<meta
 		name="description"
-		content="Contact J2 IT Solutions for reliable, affordable IT support. Schedule your free consultation or get your IT health check today. Serving small businesses in Florida."
+		content="Stop overpaying for IT support. Contact J2 IT Solutions to discover how you can save thousands while getting better IT protection. Free consultation shows exact savings."
 	/>
 </svelte:head>
 
@@ -32,10 +32,10 @@
 		<div class="max-w-6xl mx-auto">
 			<!-- Header -->
 			<div class="text-center mb-12">
-				<h1 class="text-3xl sm:text-4xl font-bold mb-4">Ready to Stop Worrying About IT?</h1>
+				<h1 class="text-3xl sm:text-4xl font-bold mb-4">Ready to Cut Your IT Costs in Half?</h1>
 				<p class="text-xl text-white/70 max-w-3xl mx-auto">
-					Let's talk about your business and how I can help simplify your technology. Choose the
-					option that works best for you.
+					Let's calculate exactly how much you can save while getting better IT protection than you have now. 
+					Most clients save $1000+ monthly on prevented issues alone.
 				</p>
 			</div>
 
@@ -51,7 +51,7 @@
 						</div>
 						<h2 class="text-2xl font-bold mb-2">Send a Message</h2>
 						<p class="text-white/70">
-							Tell me about your business and IT needs. I'll get back to you within 24 hours.
+							Tell me about your IT challenges and I'll show you how to solve them for less than you're spending now.
 						</p>
 					</div>
 
@@ -75,10 +75,10 @@
 
 						<!-- Calendar Integration Placeholder -->
 						<div class="bg-white/5 rounded-xl p-8 text-center">
-							<h3 class="text-lg font-semibold mb-4">Free 20-Minute IT Consultation</h3>
+							<h3 class="text-lg font-semibold mb-4">Free 20-Minute Cost-Savings Analysis</h3>
 							<p class="text-white/60 mb-6">
-								I'll learn about your business and current IT setup, then provide personalized
-								recommendations.
+								I'll analyze your current IT spending and show you exactly where you're overpaying — 
+								typically saving businesses $2000-5000 per year.
 							</p>
 
 							<!-- Calendar Link/Button -->
@@ -104,14 +104,14 @@
 										icon="heroicons:check-circle"
 										class="w-5 h-5 text-[#4dd36f] mt-0.5 flex-shrink-0"
 									/>
-									<p class="text-sm text-white/70">Quick overview of your current IT setup</p>
+									<p class="text-sm text-white/70">Analysis of your current IT costs vs. what you should pay</p>
 								</div>
 								<div class="flex items-start gap-3">
 									<Icon
 										icon="heroicons:check-circle"
 										class="w-5 h-5 text-[#4dd36f] mt-0.5 flex-shrink-0"
 									/>
-									<p class="text-sm text-white/70">Identify immediate risks and opportunities</p>
+									<p class="text-sm text-white/70">Identify where you're losing money to IT problems</p>
 								</div>
 								<div class="flex items-start gap-3">
 									<Icon
@@ -119,7 +119,7 @@
 										class="w-5 h-5 text-[#4dd36f] mt-0.5 flex-shrink-0"
 									/>
 									<p class="text-sm text-white/70">
-										Discuss how my services can help your business
+										Calculate your exact ROI from professional IT support
 									</p>
 								</div>
 								<div class="flex items-start gap-3">
@@ -128,7 +128,7 @@
 										class="w-5 h-5 text-[#4dd36f] mt-0.5 flex-shrink-0"
 									/>
 									<p class="text-sm text-white/70">
-										No pressure, no obligation — just helpful advice
+										Get a clear cost comparison — keep it whether you work with me or not
 									</p>
 								</div>
 							</div>

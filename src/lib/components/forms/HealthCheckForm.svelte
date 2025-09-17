@@ -53,11 +53,12 @@
 	}
 
 	const benefits = [
-		'Whether your data is actually being backed up',
-		'Hidden security risks that could cost you thousands',
-		"Software you're paying for but don't need",
-		'How much downtime is really costing your business',
-		'Simple fixes that could save you hours each week'
+		'How much downtime is actually costing you (usually $500-2000 per incident)',
+		'Which security gaps could shut down your business',
+		"Where you're overpaying for software you don't need",
+		'Why your current IT approach costs more than professional support',
+		'Exactly what proper IT support should cost for your size business',
+		'Simple fixes you can implement immediately to reduce risks'
 	];
 </script>
 
@@ -66,17 +67,17 @@
 		<!-- Header -->
 		<div class="text-center mb-8">
 			<h1 class="text-3xl sm:text-4xl font-bold mb-4">
-				Find Out If Your Business Is At Risk of
-				<span class="gradient-text">Losing Data, Downtime, or Unnecessary Costs</span>
+				Discover How Much Money
+				<span class="gradient-text">Your IT Problems Are Really Costing You</span>
 			</h1>
 			<p class="text-xl text-white/70 mb-6">
-				Free 15-Minute IT Health Check — No obligation, just honest advice
+				Free 15-minute assessment reveals hidden IT risks and shows you exactly how to fix them — whether you work with me or not
 			</p>
 		</div>
 
 		<!-- What You'll Discover -->
 		<div class="bg-[#1a1a2e] rounded-2xl p-8 mb-8">
-			<h2 class="text-2xl font-bold mb-6 text-center">What You'll Discover</h2>
+			<h2 class="text-2xl font-bold mb-6 text-center">What You'll Learn:</h2>
 			<div class="grid md:grid-cols-2 gap-4">
 				{#each benefits as benefit, i}
 					<div class="flex items-start gap-3">
@@ -100,7 +101,7 @@
 		<!-- Form -->
 		<div class="bg-[#1a1a2e] rounded-2xl p-8 shadow-2xl">
 			<h3 class="text-2xl font-bold mb-6 text-center gradient-text">
-				Get Your Free IT Health Check
+				Claim Your Free IT Cost Analysis
 			</h3>
 
 			{#if generalError}
@@ -285,7 +286,7 @@
 							<div class="spinner"></div>
 							<span>Processing...</span>
 						{:else}
-							<span>Get My Free IT Health Check</span>
+							<span>Get My Free IT Cost Analysis</span>
 							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path
 									stroke-linecap="round"
@@ -304,9 +305,9 @@
 						<strong>What happens next?</strong>
 					</p>
 					<p class="text-xs text-white/60">
-						I'll personally review your information and contact you within 24 hours to schedule your
-						free 15-minute IT health check. No spam, no pressure — just helpful advice tailored to
-						your business.
+						I'll personally review your information and show you exactly how much you could save by switching to 
+						professional IT support. Most businesses save $1000+ per month in prevented issues. No spam, no pressure — 
+						just honest numbers based on your actual situation.
 					</p>
 				</div>
 			</form>

@@ -22,6 +22,12 @@ export function scrollToSection(index, direction = 'down') {
 
 		// Use CSS transform for smoother animation
 		container.style.transform = `translateY(-${targetY}px)`;
+
+		// Reset scroll position of the new section
+		const newSection = document.querySelector(`[data-section="${index}"]`);
+		if (newSection) {
+			newSection.scrollTop = 0;
+		}
 	}
 
 	clearTimeout(scrollTimeout);
@@ -49,6 +55,32 @@ export function setupSectionScrolling() {
 
 	// Improved wheel handling with debouncing and sensitivity control
 	function handleWheel(e) {
+		// Get the current section element
+		const currentSectionIndex = get(currentSection);
+		const sectionElement = document.querySelector(`[data-section="${currentSectionIndex}"]`);
+
+		if (sectionElement) {
+			// Check if the section has scrollable content
+			const hasScrollableContent = sectionElement.scrollHeight > sectionElement.clientHeight;
+			const scrollTop = sectionElement.scrollTop;
+			const scrollHeight = sectionElement.scrollHeight;
+			const clientHeight = sectionElement.clientHeight;
+			const isAtTop = scrollTop <= 0;
+			const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+			// If section has scrollable content and we're not at boundaries, scroll within section
+			if (hasScrollableContent) {
+				if (e.deltaY > 0 && !isAtBottom) {
+					// Scrolling down but not at bottom - scroll within section
+					return; // Let default scrolling happen
+				} else if (e.deltaY < 0 && !isAtTop) {
+					// Scrolling up but not at top - scroll within section
+					return; // Let default scrolling happen
+				}
+			}
+		}
+
+		// If we're here, either no scrollable content or at boundaries - handle section transition
 		e.preventDefault();
 
 		const now = Date.now();
@@ -83,6 +115,34 @@ export function setupSectionScrolling() {
 
 	// Keyboard navigation
 	function handleKeyDown(e) {
+		// Skip if not arrow/page keys
+		if (!['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp'].includes(e.key)) return;
+
+		// Get the current section element
+		const currentSectionIndex = get(currentSection);
+		const sectionElement = document.querySelector(`[data-section="${currentSectionIndex}"]`);
+
+		if (sectionElement) {
+			const hasScrollableContent = sectionElement.scrollHeight > sectionElement.clientHeight;
+			const scrollTop = sectionElement.scrollTop;
+			const scrollHeight = sectionElement.scrollHeight;
+			const clientHeight = sectionElement.clientHeight;
+			const isAtTop = scrollTop <= 0;
+			const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+			// Handle scrollable content
+			if (hasScrollableContent) {
+				if ((e.key === 'ArrowDown' || e.key === 'PageDown') && !isAtBottom) {
+					// Let default scrolling happen within section
+					return;
+				} else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && !isAtTop) {
+					// Let default scrolling happen within section
+					return;
+				}
+			}
+		}
+
+		// Handle section transitions
 		const now = Date.now();
 		if (now - lastScrollTime < 500) return; // Prevent too rapid navigation
 
