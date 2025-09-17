@@ -188,14 +188,6 @@
 		animation: spin 1s linear infinite;
 	}
 
-	@keyframes spin {
-		from {
-			transform: rotate(0deg);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
 
 	.gradient-text {
 		background: linear-gradient(135deg, #4dd3ff 0%, #4dd36f 100%);

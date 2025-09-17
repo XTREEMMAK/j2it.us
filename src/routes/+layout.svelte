@@ -142,22 +142,5 @@
 			animation-fill-mode: backwards;
 		}
 
-		@keyframes fade-out {
-			from {
-				opacity: 1;
-			}
-			to {
-				opacity: 0;
-			}
-		}
-
-		@keyframes fade-in {
-			from {
-				opacity: 0;
-			}
-			to {
-				opacity: 1;
-			}
-		}
 	}
 </style>

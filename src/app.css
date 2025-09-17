@@ -1,6 +1,28 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 
+/* Shared design tokens */
+:root {
+	--breakpoint-desktop: 770px;
+	--breakpoint-intermediate-min: 961px;
+	--breakpoint-intermediate-max: 1400px;
+	--breakpoint-height-min: 800px;
+	--breakpoint-height-max: 1100px;
+	--breakpoint-short-height: 950px;
+	--breakpoint-very-short: 800px;
+
+	--title-size-large: 3rem;
+	--title-size-medium: 2rem;
+	--title-size-small: 1.75rem;
+	--title-line-height: 1.2;
+	--title-weight: 700;
+
+	--section-padding-desktop: 100px;
+	--section-padding-intermediate: 90px;
+	--section-padding-short: 80px;
+	--section-padding-very-short: 70px;
+}
+
 /* Base font size */
 html {
 	font-size: 16px;
@@ -208,7 +230,30 @@ textarea::placeholder {
 	}
 }
 
+@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+
 /* Utility classes */
+.bg-gradient-radial {
+	background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));
+}
+
 .glow-green {
 	box-shadow: 0 0 30px rgba(77, 211, 111, 0.5);
 }

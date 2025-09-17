@@ -193,9 +193,6 @@
 <style>
 	/* float-glow animations defined in app.css */
 
-	.bg-gradient-radial {
-		background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));
-	}
 
 	/* Override for larger screens */
 	@media (min-width: 1024px) {

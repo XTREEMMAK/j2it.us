@@ -368,33 +368,6 @@
 		}
 	}
 
-	@keyframes gradient-rotate {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
-	}
-
-	@keyframes pulse-glow {
-		0%,
-		100% {
-			opacity: 0.6;
-			transform: scale(1);
-		}
-		50% {
-			opacity: 0.9;
-			transform: scale(1.05);
-		}
-	}
-
-	.bg-gradient-radial {
-		background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to));
-	}
 
 	/* Match title sizes across all sections at intermediate resolutions */
 	@media (min-width: 961px) and (max-width: 1400px) and (min-height: 800px) and (max-height: 1100px) {

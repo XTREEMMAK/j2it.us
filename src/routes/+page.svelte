@@ -121,6 +121,7 @@
 </div>
 
 <style>
+
 	/* Desktop: Full page scroll behavior */
 	@media (min-width: 770px) {
 		/* Hide footer on homepage by default to prevent flash */
@@ -182,7 +183,7 @@
 			overflow: visible;
 		}
 
-		/* Better scaling for intermediate resolutions */
+		/* Standardized typography scaling */
 		.full-page-section :global(h1) {
 			font-size: 2.5rem !important;
 			line-height: 1.1 !important;
@@ -213,7 +214,7 @@
 			font-size: 1.2rem !important;
 		}
 
-		/* Reduce spacing for better fit */
+		/* Standardized spacing reduction */
 		.full-page-section :global(.mb-12) {
 			margin-bottom: 1.5rem !important;
 		}
@@ -240,9 +241,9 @@
 	}
 
 	/* Desktop with shorter heights - need to scale down */
-	@media (min-width: 770px) and (max-height: 950px) {
+	@media (min-width: var(--breakpoint-desktop)) and (max-height: var(--breakpoint-short-height)) {
 		.full-page-section {
-			padding-top: 80px;
+			padding-top: var(--section-padding-short);
 			align-items: flex-start;
 			overflow-y: auto;
 			overflow-x: hidden;
@@ -295,9 +296,9 @@
 	}
 
 	/* Very short desktop heights like 1024x800 */
-	@media (min-width: 770px) and (max-height: 800px) {
+	@media (min-width: var(--breakpoint-desktop)) and (max-height: var(--breakpoint-very-short)) {
 		.full-page-section {
-			padding-top: 70px;
+			padding-top: var(--section-padding-very-short);
 			align-items: flex-start;
 			overflow-y: auto;
 			overflow-x: hidden;
