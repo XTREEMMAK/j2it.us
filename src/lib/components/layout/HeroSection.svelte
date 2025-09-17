@@ -193,7 +193,6 @@
 <style>
 	/* float-glow animations defined in app.css */
 
-
 	/* Override for larger screens */
 	@media (min-width: 1024px) {
 		.hero-title {

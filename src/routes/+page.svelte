@@ -121,7 +121,6 @@
 </div>
 
 <style>
-
 	/* Desktop: Full page scroll behavior */
 	@media (min-width: 770px) {
 		/* Hide footer on homepage by default to prevent flash */

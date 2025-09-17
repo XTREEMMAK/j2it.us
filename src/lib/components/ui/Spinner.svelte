@@ -16,5 +16,4 @@
 		border-radius: 50%;
 		animation: spin 1s linear infinite;
 	}
-
 </style>

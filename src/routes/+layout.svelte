@@ -141,6 +141,5 @@
 			animation-delay: 0.15s;
 			animation-fill-mode: backwards;
 		}
-
 	}
 </style>

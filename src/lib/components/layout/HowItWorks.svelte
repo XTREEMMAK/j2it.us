@@ -289,7 +289,6 @@
 		opacity: 1;
 	}
 
-
 	/* Match title sizes across all sections at intermediate resolutions */
 	@media (min-width: 961px) and (max-width: 1400px) and (min-height: 800px) and (max-height: 1100px) {
 		#how-it-works h2,

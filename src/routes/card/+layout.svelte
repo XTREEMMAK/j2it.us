@@ -104,6 +104,5 @@
 		::view-transition-new(root) {
 			animation: fade-in 0.3s ease-out;
 		}
-
 	}
 </style>

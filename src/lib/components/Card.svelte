@@ -291,5 +291,4 @@
 	:global(.card-page p + p) {
 		margin-top: 0.02rem !important;
 	}
-
 </style>
