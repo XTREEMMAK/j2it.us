@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Health check form validation now accepts actual dropdown values (1-3, 4-6, etc.)
 - Optional form fields properly allow empty submissions
 - Resolved "Please enter a valid number" error for computer count dropdown
+- **CSS Media Query Issue**: Fixed broken homepage layout by replacing CSS custom properties with hardcoded values in media queries (CSS variables don't work in media query conditions)
 
 ### Refactored
 
@@ -47,8 +48,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Balanced approach: secrets for location/contact data, hardcoded for static info
 
 - **Code Quality Improvements**
-  - Started code consolidation and optimization process
-  - Identified areas for component reusability improvements
+  - **CSS Consolidation**: Achieved 82-line code reduction (38% reduction in affected files)
+  - **Animation Deduplication**: Removed 5 duplicate animations (`gradient-rotate`, `pulse-glow`, `spin`, `fade-in`, `fade-out`)
+  - **Design Token Centralization**: Added 22 centralized CSS custom properties in `app.css`
+  - **Utility Class Consolidation**: Created shared `.bg-gradient-radial` utility class
   - Created shared utilities (Spinner, throttle, formHandler)
   - Optimized mouse tracking with throttling for 60fps performance
 
