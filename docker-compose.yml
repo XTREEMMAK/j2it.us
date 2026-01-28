@@ -1,0 +1,23 @@
+services:
+  j2it_dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps
+    container_name: j2it_dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - .env
+    command: npm run dev -- --host 0.0.0.0
+    networks:
+      - j2it_network
+
+networks:
+  j2it_network:
+    driver: bridge

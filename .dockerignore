@@ -1,0 +1,46 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs (we build inside Docker)
+build
+.output
+.svelte-kit
+
+# Environment files (passed as build args)
+.env
+.env.*
+!.env.example
+!.env.production.template
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.code-workspace
+
+# Documentation
+*.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+*.test.*
+*.spec.*
+__tests__
+coverage
+
+# Logs
+*.log
+npm-debug.log*
+
+# Deploy scripts (not needed in container)
+deploy.sh
+
+# Claude/AI
+.claude

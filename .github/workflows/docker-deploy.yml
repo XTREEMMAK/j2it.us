@@ -1,0 +1,162 @@
+name: Build and Deploy Docker Image
+
+on:
+  push:
+    branches: [main]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha,prefix=
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            PUBLIC_CDN_URL=${{ secrets.PUBLIC_CDN_URL }}
+            PUBLIC_TAWK_PROPERTY_ID=${{ secrets.PUBLIC_TAWK_PROPERTY_ID }}
+            PUBLIC_TAWK_WIDGET_ID=${{ secrets.PUBLIC_TAWK_WIDGET_ID }}
+            PUBLIC_SCHEDULE_CALL_ENABLED=false
+            PUBLIC_INSIGHTS_ENABLED=false
+            PUBLIC_BUSINESS_NAME=J² IT Solutions
+            PUBLIC_BUSINESS_ALT_NAME=J2IT
+            PUBLIC_BUSINESS_URL=https://www.j2it.us
+            PUBLIC_BUSINESS_DESCRIPTION=Affordable IT support and web solutions for small businesses. Flat monthly pricing, no contracts, personal service.
+            PUBLIC_BUSINESS_EMAIL=contact@j2it.us
+            PUBLIC_BUSINESS_PRICE_RANGE=$$
+            PUBLIC_FOUNDER_NAME=Jamaal Ephriam
+            PUBLIC_FOUNDER_TITLE=IT Solutions Expert
+            PUBLIC_BUSINESS_AREA_SERVED=Florida
+            PUBLIC_BUSINESS_HOURS_DAYS=Monday,Tuesday,Wednesday,Thursday,Friday
+            PUBLIC_BUSINESS_HOURS_OPEN=09:00
+            PUBLIC_BUSINESS_HOURS_CLOSE=17:00
+            PUBLIC_BUSINESS_PHONE=${{ secrets.PUBLIC_BUSINESS_PHONE }}
+            PUBLIC_BUSINESS_STREET=${{ secrets.PUBLIC_BUSINESS_STREET }}
+            PUBLIC_BUSINESS_CITY=${{ secrets.PUBLIC_BUSINESS_CITY }}
+            PUBLIC_BUSINESS_STATE=${{ secrets.PUBLIC_BUSINESS_STATE }}
+            PUBLIC_BUSINESS_ZIP=${{ secrets.PUBLIC_BUSINESS_ZIP }}
+            PUBLIC_BUSINESS_COUNTRY=${{ secrets.PUBLIC_BUSINESS_COUNTRY }}
+            PUBLIC_BUSINESS_LATITUDE=${{ secrets.PUBLIC_BUSINESS_LATITUDE }}
+            PUBLIC_BUSINESS_LONGITUDE=${{ secrets.PUBLIC_BUSINESS_LONGITUDE }}
+            WEBHOOK_JWT_SECRET=${{ secrets.WEBHOOK_JWT_SECRET }}
+            N8N_CONTACT_WEBHOOK_URL=${{ secrets.N8N_CONTACT_WEBHOOK_URL }}
+            N8N_HEALTH_CHECK_WEBHOOK_URL=${{ secrets.N8N_HEALTH_CHECK_WEBHOOK_URL }}
+            RATE_LIMIT_WINDOW=60000
+            RATE_LIMIT_MAX_REQUESTS=10
+            GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}
+            GOOGLE_BUSINESS_PLACE_ID=${{ secrets.GOOGLE_BUSINESS_PLACE_ID }}
+            CARD_JAMAAL_NAME=J² IT Solutions
+            CARD_JAMAAL_PERSON=Jamaal Ephriam
+            CARD_JAMAAL_TITLE=IT Solutions Expert
+            CARD_JAMAAL_PHONE=754-423-8730
+            CARD_JAMAAL_EMAIL=jamaal@j2it.us
+            CARD_JAMAAL_STREET=
+            CARD_JAMAAL_CITY=Coconut Creek
+            CARD_JAMAAL_STATE=FL
+            CARD_JAMAAL_ZIP=33073
+            CARD_JAMAAL_COUNTRY=USA
+            CARD_JAMAAL_IMAGE=Jamaal_Photo.webp
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to server
+        run: |
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
+          set -e
+
+          cd ${{ secrets.SERVER_DIRECTORY }}
+
+          echo "Pulling new image..."
+          docker pull ghcr.io/${{ github.repository }}:latest
+
+          echo "Creating docker-compose.yml..."
+          cat > docker-compose.yml << COMPOSE
+services:
+  j2it_web:
+    image: ghcr.io/${{ github.repository }}:latest
+    container_name: j2it_web
+    restart: unless-stopped
+    ports:
+      - "${{ secrets.APP_PORT }}:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+      - PUBLIC_SCHEDULE_CALL_ENABLED=false
+      - PUBLIC_INSIGHTS_ENABLED=false
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+COMPOSE
+
+          echo "Stopping old container..."
+          docker compose down || true
+
+          echo "Starting new container..."
+          docker compose up -d
+
+          echo "Cleaning up old images..."
+          docker image prune -f
+
+          echo "Verifying deployment..."
+          sleep 5
+          docker ps | grep j2it_web
+
+          echo "Deployment complete!"
+          EOF
