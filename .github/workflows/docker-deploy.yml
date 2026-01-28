@@ -97,6 +97,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Add server to known_hosts
         run: |
           mkdir -p ~/.ssh
@@ -107,56 +110,15 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Prepare docker-compose file
+        run: |
+          sed -i 's|ghcr.io/xtreemmak/j2it.com:${IMAGE_TAG:-latest}|ghcr.io/${{ github.repository }}:latest|g' docker-compose.prod.yml
+          sed -i 's|${APP_PORT:-3000}|${{ secrets.APP_PORT }}|g' docker-compose.prod.yml
+
+      - name: Upload docker-compose to server
+        run: |
+          scp docker-compose.prod.yml ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DIRECTORY }}/docker-compose.yml
+
       - name: Deploy to server
         run: |
-          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
-          set -e
-
-          cd ${{ secrets.SERVER_DIRECTORY }}
-
-          echo "Pulling new image..."
-          docker pull ghcr.io/${{ github.repository }}:latest
-
-          echo "Creating docker-compose.yml..."
-          cat > docker-compose.yml << COMPOSE
-services:
-  j2it_web:
-    image: ghcr.io/${{ github.repository }}:latest
-    container_name: j2it_web
-    restart: unless-stopped
-    ports:
-      - "${{ secrets.APP_PORT }}:3000"
-    environment:
-      - NODE_ENV=production
-      - PORT=3000
-      - HOST=0.0.0.0
-      - PUBLIC_SCHEDULE_CALL_ENABLED=false
-      - PUBLIC_INSIGHTS_ENABLED=false
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
-      interval: 30s
-      timeout: 3s
-      retries: 3
-      start_period: 10s
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-COMPOSE
-
-          echo "Stopping old container..."
-          docker compose down || true
-
-          echo "Starting new container..."
-          docker compose up -d
-
-          echo "Cleaning up old images..."
-          docker image prune -f
-
-          echo "Verifying deployment..."
-          sleep 5
-          docker ps | grep j2it_web
-
-          echo "Deployment complete!"
-          EOF
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'cd ${{ secrets.SERVER_DIRECTORY }} && docker pull ghcr.io/${{ github.repository }}:latest && docker compose down || true && docker compose up -d && docker image prune -f && sleep 5 && docker ps | grep j2it_web && echo "Deployment complete!"'
