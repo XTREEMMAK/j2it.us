@@ -1,6 +1,6 @@
 services:
   j2it_web:
-    image: ghcr.io/xtreemmak/j2it.com:${IMAGE_TAG:-latest}
+    image: ghcr.io/xtreemmak/j2it.us:${IMAGE_TAG:-latest}
     container_name: j2it_web
     restart: unless-stopped
     ports:

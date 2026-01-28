@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: xtreemmak/j2it.us
 
 jobs:
   build-and-push:
@@ -112,7 +112,7 @@ jobs:
 
       - name: Prepare docker-compose file
         run: |
-          sed -i 's|ghcr.io/xtreemmak/j2it.com:${IMAGE_TAG:-latest}|ghcr.io/${{ github.repository }}:latest|g' docker-compose.prod.yml
+          sed -i 's|ghcr.io/xtreemmak/j2it.us:${IMAGE_TAG:-latest}|ghcr.io/${{ env.IMAGE_NAME }}:latest|g' docker-compose.prod.yml
           sed -i 's|${APP_PORT:-3000}|${{ secrets.APP_PORT }}|g' docker-compose.prod.yml
 
       - name: Upload docker-compose to server
@@ -121,4 +121,4 @@ jobs:
 
       - name: Deploy to server
         run: |
-          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'cd ${{ secrets.SERVER_DIRECTORY }} && docker pull ghcr.io/${{ github.repository }}:latest && docker compose down || true && docker compose up -d && docker image prune -f && sleep 5 && docker ps | grep j2it_web && echo "Deployment complete!"'
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'cd ${{ secrets.SERVER_DIRECTORY }} && docker pull ghcr.io/${{ env.IMAGE_NAME }}:latest && docker compose down || true && docker compose up -d && docker image prune -f && sleep 5 && docker ps | grep j2it_web && echo "Deployment complete!"'
