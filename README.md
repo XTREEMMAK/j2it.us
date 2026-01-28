@@ -11,7 +11,7 @@ This codebase has been optimized for performance, maintainability, and SEO. See 
 - **Framework**: SvelteKit with Svelte 5
 - **Styling**: Tailwind CSS v4 with custom design system
 - **Build Tool**: Vite
-- **Deployment**: Node.js adapter for server-side rendering
+- **Deployment**: Docker with GitHub Container Registry (ghcr.io)
 - **Font**: Inter (Google Fonts)
 - **Validation**: Valibot for form schemas
 - **Security**: JWT authentication, rate limiting, input sanitization
@@ -38,8 +38,8 @@ src/
 
 ### Prerequisites
 
-- Node.js 22+
-- npm
+- Node.js 22+ (for local development without Docker)
+- Docker and Docker Compose (recommended)
 
 ### Installation
 
@@ -48,30 +48,44 @@ src/
 git clone <repository-url>
 cd j2it.com
 
-# Install dependencies
-npm install
-
 # Copy environment template
 cp .env.example .env
 ```
 
-### Development
+### Development with Docker (Recommended)
 
 ```bash
+# Start development server with hot reload
+docker compose up
+
+# Or run in background
+docker compose up -d
+
+# View logs
+docker compose logs -f
+```
+
+### Development without Docker
+
+```bash
+# Install dependencies
+npm install
+
 # Start development server
 npm run dev
 
 # Open in browser
 npm run dev -- --open
+```
 
-# Run linting
+### Linting & Formatting
+
+```bash
 npm run lint
-
-# Format code
 npm run format
 ```
 
-### Production Build
+### Production Build (Local)
 
 ```bash
 # Build for production
@@ -111,31 +125,61 @@ Required environment variables (see `.env.example`):
 
 ## 🚀 Deployment
 
-### GitHub Actions
+### Docker Architecture
 
-The project includes automated deployment via GitHub Actions:
+The project uses a multi-stage Docker build for optimized production images:
 
-1. Linting and build verification
-2. Template-based environment variable setup using `.env.production.template`
-3. Asset deployment to DigitalOcean Spaces
-4. PM2 process management on server
+- **Stage 1 (deps)**: Install all dependencies
+- **Stage 2 (builder)**: Build the SvelteKit app with environment variables
+- **Stage 3 (runner)**: Minimal production image with Node.js 22 Alpine
 
-**Required GitHub Secrets (Location/Contact Data):**
+### GitHub Actions CI/CD
 
+Automated deployment on push to `main`:
+
+1. Build Docker image with all environment variables as build args
+2. Push to GitHub Container Registry (`ghcr.io/xtreemmak/j2it.us`)
+3. SSH to production server
+4. Pull latest image and restart container
+
+**Required GitHub Secrets:**
+
+- `SERVER_IP`, `SERVER_USERNAME`, `SERVER_DIRECTORY`, `APP_PORT`
+- `SSH_PRIVATE_KEY`
+- `PUBLIC_CDN_URL`, `WEBHOOK_JWT_SECRET`
+- `N8N_CONTACT_WEBHOOK_URL`, `N8N_HEALTH_CHECK_WEBHOOK_URL`
+- `PUBLIC_TAWK_PROPERTY_ID`, `PUBLIC_TAWK_WIDGET_ID`
+- `GOOGLE_PLACES_API_KEY`, `GOOGLE_BUSINESS_PLACE_ID`
 - `PUBLIC_BUSINESS_PHONE`, `PUBLIC_BUSINESS_STREET`, `PUBLIC_BUSINESS_CITY`
 - `PUBLIC_BUSINESS_STATE`, `PUBLIC_BUSINESS_ZIP`, `PUBLIC_BUSINESS_COUNTRY`
 - `PUBLIC_BUSINESS_LATITUDE`, `PUBLIC_BUSINESS_LONGITUDE`
-- Standard secrets: `SERVER_IP`, `SERVER_USERNAME`, `WEBHOOK_JWT_SECRET`, etc.
 
-**Hardcoded in Workflow (Static Business Info):**
+### Docker Files
 
-- Business name, founder info, hours, email, and other static data
+- `Dockerfile` - Multi-stage production build
+- `docker-compose.yml` - Local development with hot reload
+- `docker-compose.prod.yml` - Production configuration
+- `.dockerignore` - Excludes unnecessary files from build
 
 ### Manual Deployment
 
 ```bash
-# Build and deploy
+# Build and run locally (production mode)
+docker compose -f docker-compose.prod.yml up -d
+
+# Sync static assets to CDN
 ./deploy.sh
+```
+
+### Server Requirements
+
+```bash
+# Install Docker
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
+
+# Log out and back in, then verify
+docker ps
 ```
 
 ## 🎨 Key Features
