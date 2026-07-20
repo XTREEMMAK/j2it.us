@@ -1,4 +1,4 @@
-import { WEBHOOK_JWT_SECRET } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import jwt from 'jsonwebtoken';
 import { checkRateLimit, getRateLimitInfo } from './rateLimiter.js';
 
@@ -31,7 +31,7 @@ export async function sendToWebhook(data, clientIp, webhookUrl) {
 					timestamp: new Date().toISOString()
 				}
 			},
-			WEBHOOK_JWT_SECRET
+			env.WEBHOOK_JWT_SECRET
 		);
 
 		// Prepare the webhook payload
@@ -80,7 +80,7 @@ export async function sendToWebhook(data, clientIp, webhookUrl) {
  */
 export function verifyWebhookToken(token) {
 	try {
-		return jwt.verify(token, WEBHOOK_JWT_SECRET);
+		return jwt.verify(token, env.WEBHOOK_JWT_SECRET);
 	} catch (error) {
 		console.error('JWT verification failed:', error);
 		return null;

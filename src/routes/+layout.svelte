@@ -1,14 +1,13 @@
 <script>
 	import '../reset.css';
 	import '../app.css';
-	import { PUBLIC_CDN_URL } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 	import { onNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import Navigation from '$lib/components/layout/Navigation.svelte';
 	import MyFooter from '$lib/components/layout/Footer.svelte';
 	import ScrollToTop from '$lib/components/layout/ScrollToTop.svelte';
 	import TawkMessenger from 'tawk-messenger-svelte';
-	import { PUBLIC_TAWK_PROPERTY_ID, PUBLIC_TAWK_WIDGET_ID } from '$env/static/public';
 	import { throttle } from '$lib/utils/throttle.js';
 	import { createLocalBusinessSchema } from '$lib/utils/structuredData.js';
 
@@ -83,7 +82,7 @@
 		property="og:description"
 		content="Get enterprise-level IT support for small business starting at $400/month. Save thousands compared to emergency IT calls and full-time employees."
 	/>
-	<meta property="og:image" content="{PUBLIC_CDN_URL}/images/Jamaal_Photo.webp" />
+	<meta property="og:image" content="{env.PUBLIC_CDN_URL}/images/Jamaal_Photo.webp" />
 	<meta property="og:url" content="https://www.j2it.us" />
 	<meta property="og:type" content="website" />
 
@@ -94,7 +93,7 @@
 		name="twitter:description"
 		content="Enterprise IT protection scaled for small business. Save $4000+/month vs. full-time IT. Start at $400/month - less than one emergency call."
 	/>
-	<meta name="twitter:image" content="{PUBLIC_CDN_URL}/images/Jamaal_Photo.webp" />
+	<meta name="twitter:image" content="{env.PUBLIC_CDN_URL}/images/Jamaal_Photo.webp" />
 
 	<!-- Canonical URL -->
 	<link rel="canonical" href="https://www.j2it.us" />
@@ -123,8 +122,8 @@
 	<ScrollToTop />
 
 	<!-- Tawk.to Live Chat (Desktop Only) -->
-	{#if showTawk}
-		<TawkMessenger propertyId={PUBLIC_TAWK_PROPERTY_ID} widgetId={PUBLIC_TAWK_WIDGET_ID} />
+	{#if showTawk && env.PUBLIC_TAWK_PROPERTY_ID && env.PUBLIC_TAWK_WIDGET_ID}
+		<TawkMessenger propertyId={env.PUBLIC_TAWK_PROPERTY_ID} widgetId={env.PUBLIC_TAWK_WIDGET_ID} />
 	{/if}
 </div>
 

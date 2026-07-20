@@ -14,10 +14,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Deployment
 
-- `./deploy.sh` - Custom deployment script that:
-  1. Pushes code to GitHub (triggers GitHub Actions)
-  2. Syncs static assets to DigitalOcean Spaces CDN
-  - Requires `.env.production` file with CDN and Git configuration
+- Pushing to `main` triggers `.github/workflows/build-image.yml`, which builds a
+  configuration-free Docker image and pushes it to `ghcr.io/xtreemmak/j2it.us`.
+  The workflow does **not** deploy — internal infra (Semaphore) pulls a tag and
+  runs it.
+- `./deploy.sh` - Syncs static assets to the DigitalOcean Spaces CDN only.
+  Requires `.env.production` (see `.env.production.template`).
+- `.env.docker.example` - The runtime environment contract for the container.
 
 ## Architecture Overview
 
@@ -36,9 +39,15 @@ This is a **SvelteKit** application with server-side rendering, configured for N
 
 1. **Node Adapter Configuration**: The project uses `@sveltejs/adapter-node` instead of the default auto-adapter, configured in `svelte.config.js:2`
 
-2. **Environment Variables**: The app uses environment variables for CDN URLs:
+2. **Environment Variables — runtime only**: All config is read through
+   `$env/dynamic/public` and `$env/dynamic/private`, never `$env/static/*`.
+   This keeps the Docker image portable and secret-free; the same image runs in
+   any environment. **Do not introduce `$env/static/*` imports or `define:`
+   entries in `vite.config.js`** — both bake values into the bundle at build
+   time and would break this.
    - `PUBLIC_CDN_URL` - Used for loading images and assets from CDN
    - Referenced in layouts for Open Graph images and structured data
+   - Nothing is prerendered, so dynamic env is safe on every route
 
 3. **Routing Structure**:
    - Main layout (`src/routes/+layout.svelte`) handles:

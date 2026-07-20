@@ -11,7 +11,7 @@ This codebase has been optimized for performance, maintainability, and SEO. See 
 - **Framework**: SvelteKit with Svelte 5
 - **Styling**: Tailwind CSS v4 with custom design system
 - **Build Tool**: Vite
-- **Deployment**: Docker with GitHub Container Registry (ghcr.io)
+- **Deployment**: Configuration-free Docker image on GitHub Container Registry (ghcr.io), deployed by internal infra
 - **Font**: Inter (Google Fonts)
 - **Validation**: Valibot for form schemas
 - **Security**: JWT authentication, rate limiting, input sanitization
@@ -31,7 +31,7 @@ src/
 │   └── utils/               # Shared utilities (throttle, animations, structuredData)
 ├── routes/                  # SvelteKit routes and pages
 ├── static/                  # Static assets
-└── .env.production.template # Template for GitHub Actions environment setup
+└── .env.docker.example      # Runtime environment contract for the container
 ```
 
 ## 🏁 Quick Start
@@ -97,7 +97,12 @@ npm run preview
 
 ## 🔧 Environment Configuration
 
-Required environment variables (see `.env.example`):
+All configuration is resolved **at runtime**, never at build time. Nothing below
+is compiled into the bundle, so changing any of it means restarting the
+container — not rebuilding the image.
+
+- Local development: `.env` (see `.env.example`)
+- Containers: injected environment (see `.env.docker.example`)
 
 **Core Application:**
 
@@ -133,54 +138,63 @@ The project uses a multi-stage Docker build for optimized production images:
 - **Stage 2 (builder)**: Build the SvelteKit app with environment variables
 - **Stage 3 (runner)**: Minimal production image with Node.js 22 Alpine
 
+### Separation of concerns
+
+**GitHub Actions builds. Internal infra (Semaphore) deploys.**
+
+The published image is deliberately **configuration-free**: it contains no
+secrets, no CDN URL, no business data. Every value is read from the environment
+at container start via SvelteKit's `$env/dynamic/*`. That means one image digest
+can be promoted to any platform — internal Docker, DigitalOcean, or local —
+without a rebuild.
+
 ### GitHub Actions CI/CD
 
-Automated deployment on push to `main`:
+`.github/workflows/build-image.yml` runs on push to `main`, on `v*` tags, and on
+manual dispatch:
 
-1. Build Docker image with all environment variables as build args
+1. Build the Docker image (no build args)
 2. Push to GitHub Container Registry (`ghcr.io/xtreemmak/j2it.us`)
-3. SSH to production server
-4. Pull latest image and restart container
+3. Print the image digest and tags to the workflow summary
 
-**Required GitHub Secrets:**
+The workflow never touches a server. Image tags produced:
 
-- `SERVER_IP`, `SERVER_USERNAME`, `SERVER_DIRECTORY`, `APP_PORT`
-- `SSH_PRIVATE_KEY`
-- `PUBLIC_CDN_URL`, `WEBHOOK_JWT_SECRET`
-- `N8N_CONTACT_WEBHOOK_URL`, `N8N_HEALTH_CHECK_WEBHOOK_URL`
-- `PUBLIC_TAWK_PROPERTY_ID`, `PUBLIC_TAWK_WIDGET_ID`
-- `GOOGLE_PLACES_API_KEY`, `GOOGLE_BUSINESS_PLACE_ID`
-- `PUBLIC_BUSINESS_PHONE`, `PUBLIC_BUSINESS_STREET`, `PUBLIC_BUSINESS_CITY`
-- `PUBLIC_BUSINESS_STATE`, `PUBLIC_BUSINESS_ZIP`, `PUBLIC_BUSINESS_COUNTRY`
-- `PUBLIC_BUSINESS_LATITUDE`, `PUBLIC_BUSINESS_LONGITUDE`
+| Tag | When |
+| --- | --- |
+| `<commit-sha>` | every build |
+| `latest` | pushes to `main` |
+| `1.2.3` / `1.2` | pushes of a `v*` git tag |
+
+**Required GitHub Secrets:** none beyond the automatic `GITHUB_TOKEN`.
+
+### Deploying (infra)
+
+Pull a published image and supply the environment at run time:
+
+```bash
+cp .env.docker.example .env      # fill in real values
+IMAGE_TAG=<sha-or-version> docker compose -f docker-compose.prod.yml up -d
+```
+
+Prefer pinning an immutable `sha`/semver tag (or the digest printed in the
+workflow summary) over `latest`.
+
+`.env.docker.example` is the authoritative runtime environment contract — every
+variable the container reads, with notes on which are required and which are
+secrets.
 
 ### Docker Files
 
-- `Dockerfile` - Multi-stage production build
+- `Dockerfile` - Multi-stage production build, no build args
 - `docker-compose.yml` - Local development with hot reload
-- `docker-compose.prod.yml` - Production configuration
+- `docker-compose.prod.yml` - Reference production manifest for infra
+- `.env.docker.example` - Runtime environment contract
 - `.dockerignore` - Excludes unnecessary files from build
 
-### Manual Deployment
+### Static assets / CDN
 
-```bash
-# Build and run locally (production mode)
-docker compose -f docker-compose.prod.yml up -d
-
-# Sync static assets to CDN
-./deploy.sh
-```
-
-### Server Requirements
-
-```bash
-# Install Docker
-curl -fsSL https://get.docker.com | sh
-sudo usermod -aG docker $USER
-
-# Log out and back in, then verify
-docker ps
-```
+`./deploy.sh` only syncs `./static/` to the DigitalOcean Spaces CDN that
+`PUBLIC_CDN_URL` points at. It no longer deploys the application.
 
 ## 🎨 Key Features
 

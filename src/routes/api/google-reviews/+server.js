@@ -1,7 +1,5 @@
 import { json } from '@sveltejs/kit';
-
-const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
-const GOOGLE_BUSINESS_PLACE_ID = process.env.GOOGLE_BUSINESS_PLACE_ID;
+import { env } from '$env/dynamic/private';
 
 // Cache reviews for 24 hours to minimize API calls
 let reviewsCache = null;
@@ -9,6 +7,10 @@ let cacheTimestamp = 0;
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
 export async function GET() {
+	// Read credentials at request time so the container can be configured on start
+	const GOOGLE_PLACES_API_KEY = env.GOOGLE_PLACES_API_KEY;
+	const GOOGLE_BUSINESS_PLACE_ID = env.GOOGLE_BUSINESS_PLACE_ID;
+
 	// Check if API credentials are configured
 	if (!GOOGLE_PLACES_API_KEY || !GOOGLE_BUSINESS_PLACE_ID) {
 		return json({ error: 'Google Places API not configured' }, { status: 500 });
@@ -54,6 +56,9 @@ export async function GET() {
 
 		// Prepare response with business info
 		const reviewsData = {
+			// Exposed so the client can link to the Maps listing without needing
+			// the place ID as a separate public env var
+			placeId: GOOGLE_BUSINESS_PLACE_ID,
 			businessRating: data.rating || 0,
 			totalReviews: data.userRatingCount || 0,
 			highRatingReviews: formattedReviews,

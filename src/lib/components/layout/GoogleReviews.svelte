@@ -10,6 +10,7 @@
 	let reviews = [];
 	let businessRating = 0;
 	let totalReviews = 0;
+	let placeId = '';
 	let loading = true;
 	let error = null;
 	let apiConfigured = true;
@@ -23,6 +24,7 @@
 				reviews = data.highRatingReviews || [];
 				businessRating = data.businessRating || 0;
 				totalReviews = data.totalReviews || 0;
+				placeId = data.placeId || '';
 			} else {
 				error = data.error || 'Failed to load reviews';
 				// Check if API is not configured
@@ -162,8 +164,7 @@
 				<!-- Google Reviews Footer -->
 				<div class="text-center mt-12">
 					<a
-						href="https://www.google.com/maps/place/?q=place_id:{process.env
-							.GOOGLE_BUSINESS_PLACE_ID || ''}"
+						href="https://www.google.com/maps/place/?q=place_id:{placeId}"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/30 px-6 py-3 rounded-lg transition-all duration-300"

@@ -3,7 +3,7 @@ import * as v from 'valibot';
 import DOMPurify from 'isomorphic-dompurify';
 import { contactSchema } from '$lib/schemas/contact.js';
 import { sendToWebhook } from '$lib/server/webhook.js';
-import { N8N_CONTACT_WEBHOOK_URL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 export const actions = {
 	default: async ({ request, getClientAddress }) => {
@@ -47,7 +47,11 @@ export const actions = {
 			};
 
 			// Send to webhook
-			const webhookResult = await sendToWebhook(sanitizedData, clientIp, N8N_CONTACT_WEBHOOK_URL);
+			const webhookResult = await sendToWebhook(
+				sanitizedData,
+				clientIp,
+				env.N8N_CONTACT_WEBHOOK_URL
+			);
 
 			if (!webhookResult.success) {
 				console.error('Webhook failed:', webhookResult.error);

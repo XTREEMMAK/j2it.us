@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import '../../reset.css';
 	import '../../app.css';
-	import { PUBLIC_CDN_URL } from '$env/static/public';
 	import { onNavigate } from '$app/navigation';
 
 	let mouseX = 0;

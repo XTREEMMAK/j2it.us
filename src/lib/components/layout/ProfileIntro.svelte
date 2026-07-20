@@ -1,5 +1,5 @@
 <script>
-	import { PUBLIC_CDN_URL } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 	import { currentSection, scrollDirection } from '$lib/stores/sectionScroll.js';
 	import { createSectionAnimation } from '$lib/utils/sectionAnimations.js';
 
@@ -56,7 +56,7 @@
 							class="absolute inset-[3px] rounded-full bg-[#1a1a2e] flex items-center justify-center p-8"
 						>
 							<img
-								src="{PUBLIC_CDN_URL}/images/Jamaal_Photo.webp"
+								src="{env.PUBLIC_CDN_URL}/images/Jamaal_Photo.webp"
 								alt="Jamaal Ephriam"
 								class="w-64 h-64 rounded-full object-cover {imageLoaded ? '' : 'opacity-0'}"
 								on:load={handleImageLoad}

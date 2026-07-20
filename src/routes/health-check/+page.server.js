@@ -3,7 +3,7 @@ import * as v from 'valibot';
 import DOMPurify from 'isomorphic-dompurify';
 import { healthCheckSchema } from '$lib/schemas/health-check.js';
 import { sendToWebhook } from '$lib/server/webhook.js';
-import { N8N_HEALTH_CHECK_WEBHOOK_URL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 export const actions = {
 	default: async ({ request, getClientAddress }) => {
@@ -53,7 +53,7 @@ export const actions = {
 			const webhookResult = await sendToWebhook(
 				sanitizedData,
 				clientIp,
-				N8N_HEALTH_CHECK_WEBHOOK_URL
+				env.N8N_HEALTH_CHECK_WEBHOOK_URL
 			);
 
 			if (!webhookResult.success) {

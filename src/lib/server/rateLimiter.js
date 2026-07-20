@@ -1,4 +1,4 @@
-import { RATE_LIMIT_WINDOW, RATE_LIMIT_MAX_REQUESTS } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 // In-memory store for rate limiting
 const requestStore = new Map();
@@ -11,8 +11,8 @@ const requestStore = new Map();
  * @returns {boolean} - true if request is allowed, false if rate limited
  */
 export function checkRateLimit(identifier, maxRequests = null, windowMs = null) {
-	const max = maxRequests || parseInt(RATE_LIMIT_MAX_REQUESTS) || 10;
-	const window = windowMs || parseInt(RATE_LIMIT_WINDOW) || 60000; // 1 minute default
+	const max = maxRequests || parseInt(env.RATE_LIMIT_MAX_REQUESTS) || 10;
+	const window = windowMs || parseInt(env.RATE_LIMIT_WINDOW) || 60000; // 1 minute default
 
 	const now = Date.now();
 	const windowStart = now - window;
@@ -54,8 +54,8 @@ export function checkRateLimit(identifier, maxRequests = null, windowMs = null) 
  * @returns {Object} - { remaining, resetTime }
  */
 export function getRateLimitInfo(identifier, maxRequests = null, windowMs = null) {
-	const max = maxRequests || parseInt(RATE_LIMIT_MAX_REQUESTS) || 10;
-	const window = windowMs || parseInt(RATE_LIMIT_WINDOW) || 60000;
+	const max = maxRequests || parseInt(env.RATE_LIMIT_MAX_REQUESTS) || 10;
+	const window = windowMs || parseInt(env.RATE_LIMIT_WINDOW) || 60000;
 
 	const now = Date.now();
 	const windowStart = now - window;

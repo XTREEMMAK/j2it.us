@@ -1,12 +1,12 @@
 <script>
-	import { PUBLIC_CDN_URL } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 
 	import { onMount } from 'svelte';
 	import { fly, fade } from 'svelte/transition';
 
 	let active = null;
 	let mounted = false;
-	let pub_path = PUBLIC_CDN_URL;
+	let pub_path = env.PUBLIC_CDN_URL;
 
 	onMount(() => {
 		mounted = true;

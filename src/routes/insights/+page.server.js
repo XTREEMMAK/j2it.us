@@ -1,9 +1,9 @@
-import { PUBLIC_INSIGHTS_ENABLED } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 import { error, redirect } from '@sveltejs/kit';
 
 export async function load() {
 	// Check if insights are enabled
-	if (PUBLIC_INSIGHTS_ENABLED !== 'true') {
+	if (env.PUBLIC_INSIGHTS_ENABLED !== 'true') {
 		// Redirect to home page or show 404
 		throw redirect(303, '/');
 

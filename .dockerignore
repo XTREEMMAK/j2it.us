@@ -7,11 +7,9 @@ build
 .output
 .svelte-kit
 
-# Environment files (passed as build args)
+# Environment files — config is injected at runtime, never baked into the image
 .env
 .env.*
-!.env.example
-!.env.production.template
 
 # Git
 .git
