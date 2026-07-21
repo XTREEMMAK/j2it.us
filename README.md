@@ -122,6 +122,15 @@ container — not rebuilding the image.
 - `PUBLIC_BUSINESS_AREA_SERVED`, `PUBLIC_BUSINESS_HOURS_DAYS`
 - `PUBLIC_BUSINESS_HOURS_OPEN`, `PUBLIC_BUSINESS_HOURS_CLOSE`
 
+**Bot protection (Cloudflare Turnstile):**
+
+- `PUBLIC_TURNSTILE_SITE_KEY`: Public sitekey, renders the widget
+- `TURNSTILE_SECRET_KEY`: Server-side verification key
+
+Both forms are protected. If **either** key is unset, verification fails open
+(submissions still go through) and a warning is logged — so an unconfigured
+environment never silently drops leads. Set both to enforce the captcha.
+
 **Optional:**
 
 - Tawk.to chat widget configuration
@@ -159,10 +168,10 @@ manual dispatch:
 
 The workflow never touches a server. Image tags produced:
 
-| Tag | When |
-| --- | --- |
-| `<commit-sha>` | every build |
-| `latest` | pushes to `main` |
+| Tag             | When                     |
+| --------------- | ------------------------ |
+| `<commit-sha>`  | every build              |
+| `latest`        | pushes to `main`         |
 | `1.2.3` / `1.2` | pushes of a `v*` git tag |
 
 **Required GitHub Secrets:** none beyond the automatic `GITHUB_TOKEN`.
@@ -216,6 +225,7 @@ secrets.
 
 ### Security Features
 
+- Cloudflare Turnstile captcha on both forms, plus a honeypot field
 - JWT authentication for webhooks
 - Rate limiting (10 requests/minute per IP)
 - Input sanitization with DOMPurify

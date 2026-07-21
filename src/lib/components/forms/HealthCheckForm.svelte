@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import Turnstile from './Turnstile.svelte';
 
 	let submitting = false;
 	let form;
@@ -9,6 +10,7 @@
 	let showOptionalFields = false;
 	let errors = {};
 	let generalError = '';
+	let resetKey = 0;
 
 	// Get form data from page store (persisted on validation failure)
 	$: formData = $page.form;
@@ -42,6 +44,8 @@
 				if (result.data?.error) {
 					generalError = result.data.error;
 				}
+				// Turnstile tokens are single-use; issue a fresh one for the retry
+				resetKey += 1;
 			}
 
 			await update();
@@ -275,6 +279,21 @@
 						</div>
 					</div>
 				{/if}
+
+				<!-- Honeypot: hidden from real users, bots fill it in -->
+				<div class="hidden" aria-hidden="true">
+					<label for="hc_company_website">Do not fill this in</label>
+					<input
+						type="text"
+						id="hc_company_website"
+						name="company_website"
+						tabindex="-1"
+						autocomplete="off"
+					/>
+				</div>
+
+				<!-- Bot protection -->
+				<Turnstile {resetKey} />
 
 				<!-- Submit button -->
 				<div class="text-center pt-6">

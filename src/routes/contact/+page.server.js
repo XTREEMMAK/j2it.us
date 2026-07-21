@@ -3,6 +3,7 @@ import * as v from 'valibot';
 import DOMPurify from 'isomorphic-dompurify';
 import { contactSchema } from '$lib/schemas/contact.js';
 import { sendToWebhook } from '$lib/server/webhook.js';
+import { verifyTurnstile, isHoneypotTripped } from '$lib/server/turnstile.js';
 import { env } from '$env/dynamic/private';
 
 export const actions = {
@@ -19,6 +20,22 @@ export const actions = {
 				businessName: formData.get('businessName'),
 				message: formData.get('message')
 			};
+
+			// Silently accept honeypot hits so bots do not learn they were caught
+			if (isHoneypotTripped(formData)) {
+				console.warn('Contact form: honeypot tripped', { clientIp });
+				throw redirect(303, '/thank-you?type=contact');
+			}
+
+			// Verify the captcha before doing any real work
+			const turnstileResult = await verifyTurnstile(
+				formData.get('cf-turnstile-response'),
+				clientIp
+			);
+
+			if (!turnstileResult.success) {
+				return fail(400, { error: turnstileResult.error, values: data });
+			}
 
 			// Validate with Valibot
 			const validationResult = v.safeParse(contactSchema, data);
